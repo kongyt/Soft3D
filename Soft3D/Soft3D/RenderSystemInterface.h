@@ -4,18 +4,16 @@
 #include <windows.h>
 
 #include "Types.h"
+#include "Color.h"
+#include "Viewport.h"
+#include "Matrix4.h"
+#include "Texture.h"
+#include "Light.h"
+#include "BlendMode.h"
+#include "Primitivew.h"
+#include "Shader.h"
 
 namespace Soft3D{
-
-class Color;
-class Vector3f;
-class Shader;
-class Matrix4;
-class Light;
-class Texture;
-class BlendMode;
-class Primitivew;
-class Viewport;
 
 struct RenderConfig{
 	HINSTANCE hInstance;        // ³ÌÐòÊµÀý
