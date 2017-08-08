@@ -21,6 +21,9 @@ struct DLLAPI RenderConfig{
 	HINSTANCE hInstance;        // 程序实例
 	TCHAR*    title;            // 标题
 	Bool      fullScreen;       // 是否全屏
+	Bool      hasBorder;        // 是否有边框
+	Int       x;                // 左上角x坐标
+	Int       y;                // 左上角y坐标
 	Long      width;            // 非全屏时窗口客户区宽度
 	Long      height;           // 非全屏时窗口客户区高度
 	WNDPROC   wndProc;          // 消息处理函数
@@ -30,6 +33,9 @@ class DLLAPI RenderSystemInterface{
 public:
     virtual Bool InitalizeWindow(const RenderConfig& config) = 0;    // 渲染窗口初始化
     virtual void DestoryWindow() = 0;                         // 渲染窗口销毁
+
+	virtual void OnChangeSize(UInt width, UInt height) = 0;   // 窗口大小改变
+
 
     virtual void SetViewport(const Viewport& viewport) = 0;   // 设置视口
     virtual Viewport GetViewport() = 0;                       // 返回视口

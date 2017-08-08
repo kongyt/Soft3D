@@ -3,6 +3,12 @@ namespace Soft3D{
 
 	Bool RenderSystemGL::InitalizeWindow(const RenderConfig& config){
 
+		Int x = config.fullScreen ? 0 : config.x;
+		Int y = config.fullScreen ? 0 : config.y;
+		Int width = config.fullScreen ? GetSystemMetrics(SM_CXSCREEN) : config.width;
+		Int height = config.fullScreen ? GetSystemMetrics(SM_CYSCREEN) : config.height;
+		Bool hasBorder = config.fullScreen ? false : config.hasBorder;		
+
 		WNDCLASSEX wndClass = {0};
 		wndClass.cbSize = sizeof(WNDCLASSEX);
 		wndClass.style = CS_HREDRAW | CS_VREDRAW;
@@ -16,30 +22,40 @@ namespace Soft3D{
 		if(!RegisterClassEx(&wndClass)){
 			return false;
 		}
+
+		HWND hwnd;
 	
-		RECT rc = {0, 0, config.width, config.height};
-		AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, false);
+		if (hasBorder) {
+			RECT rc = { x, y, x+width, y+height };
+			AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, false);
 
-		HWND hwnd = CreateWindowEx(WS_EX_OVERLAPPEDWINDOW, config.title, config.title, WS_OVERLAPPEDWINDOW, 0, 0, rc.right-rc.left, rc.bottom-rc.top, NULL, NULL, config.hInstance, NULL); 
-
-		if(!hwnd){
+			hwnd = CreateWindowEx(WS_EX_OVERLAPPEDWINDOW, config.title, config.title, WS_OVERLAPPEDWINDOW, x, y, rc.right - rc.left, rc.bottom - rc.top, NULL, NULL, config.hInstance, NULL);			
+		}
+		else {
+			hwnd = CreateWindowEx(NULL, config.title, config.title, WS_POPUP | WS_VISIBLE, x, y, width, height, NULL, NULL, config.hInstance, NULL);
+		}
+		
+		if (!hwnd) {
 			return false;
-		} 
+		}
 		
-	
-		
-
-		HGLRC hRC;	// opengl 绘制环境
 		m_HDC = GetDC(hwnd);
 		SetupPixelFormat(m_HDC);
-		hRC = wglCreateContext(m_HDC); // 创建OpenGL绘制环境并创建一个指向OpenGL绘制环境的句柄
-		wglMakeCurrent(m_HDC, hRC);
+		m_HRC = wglCreateContext(m_HDC); // 创建OpenGL绘制环境并创建一个指向OpenGL绘制环境的句柄
+		wglMakeCurrent(m_HDC, m_HRC);
+
+		if (config.fullScreen == false) {
+			SetViewport(Viewport(0, 0, config.width, config.height));
+		}
+		else {
+			SetViewport(Viewport(0, 0, GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN)));
+		}
+
+		InitGL();
 
 		ShowWindow(hwnd, SW_NORMAL);
 		UpdateWindow(hwnd);
-
-		InitGL();
-	
+		
 		this->m_hInstance = config.hInstance;
 		this->m_hWnd = hwnd;
 		
@@ -84,20 +100,54 @@ namespace Soft3D{
 	}
 
 	void RenderSystemGL::DestoryWindow(){
-		
+		wglMakeCurrent(NULL, NULL);
+		wglDeleteContext(m_HRC);
+		ReleaseDC(m_hWnd, m_HDC);
+
+		// destroy the window explicitly
+		DestroyWindow(m_hWnd);
+	}
+
+	void RenderSystemGL::OnChangeSize(UInt width, UInt height) {
+		SetViewport(Viewport(0, 0, width, height));
 	}
 
 	void RenderSystemGL::SetViewport(const Viewport& viewport){
-	
+		m_Viewport.x = viewport.x;
+		m_Viewport.y = viewport.y;
+		m_Viewport.width = viewport.width;
+		m_Viewport.height = viewport.height;
+
+		glViewport(viewport.x, viewport.y, viewport.width, viewport.height);
 	}
 
 	Viewport RenderSystemGL::GetViewport(){
-		return Viewport();
+		return m_Viewport;
 	}
 
 	void RenderSystemGL::Clear(const Color& color){
 		glClearColor(color.r, color.g, color.b, color.a);
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BITS);
+
+		GLfloat verts[] = {
+			-0.5f, 0.0f, 0.0f,
+			0.5f,  0.0f, 0.0f,
+			0.0f, 0.5f, 0.0f
+		};
+
+		glBegin(GL_TRIANGLES);
+
+		glColor3f(1.0f, 0.0f, 0.0f);
+		glVertex2f(0.0f, 0.5f);
+
+		glColor3f(0.0f, 1.0f, 0.0f); 
+		glVertex2f(0.5f, -0.5f);
+
+		glColor3f(0.0f, 0.0f, 1.0f); 
+		glVertex2f(-0.5f, -0.5f);
+
+		glEnd();
+		glPopMatrix();
 	}
 	void RenderSystemGL::Flush(){
 		glFlush();

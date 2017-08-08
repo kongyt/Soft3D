@@ -17,6 +17,7 @@ namespace Soft3D{
 	public:
 		Bool InitalizeWindow(const RenderConfig& config);        // 渲染窗口初始化
 		void DestoryWindow();                             // 渲染窗口销毁
+		void OnChangeSize(UInt width, UInt height);       // 窗口大小改变
 
 		void SetViewport(const Viewport& viewport);       // 设置视口
 		Viewport GetViewport();                           // 返回视口
@@ -74,6 +75,8 @@ namespace Soft3D{
 		HINSTANCE m_hInstance;
 		HWND      m_hWnd;
 		HDC       m_HDC;
+		HGLRC     m_HRC;	// opengl 绘制环境
+		Viewport  m_Viewport = Viewport(0,0);
 		Color     m_brushColor;
 		Matrix4   m_projectionMatrix;
 		Matrix4   m_transformMatrix;

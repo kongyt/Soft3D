@@ -80,6 +80,7 @@
     <ClInclude Include="Color.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="DllApi.h" />
+    <ClInclude Include="Frustum.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="MathUtils.h" />
     <ClInclude Include="Matrix4.h" />
@@ -98,6 +99,7 @@
   <ItemGroup>
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="Debug.cpp" />
+    <ClCompile Include="Frustum.cpp" />
     <ClCompile Include="MathUtils.cpp" />
     <ClCompile Include="Matrix4.cpp" />
     <ClCompile Include="Quaternion.cpp" />

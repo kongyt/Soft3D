@@ -3,10 +3,13 @@
 
 using namespace Soft3D;
 
+RenderSystemInterface* renderSystem;
+
 LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
 
-void Render(RenderSystemInterface* renderSystem){
-	renderSystem->Clear(Color(0.25f, 0.25f, 0.25f, 0.0f));
+void Render(){
+	renderSystem->Clear(Color::Black);
+
 
 	renderSystem->SwapBuffer();
 }
@@ -18,12 +21,15 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE prevInstance, LPWSTR cmdLine,
 	RenderConfig config;
 	config.hInstance = hInstance;
 	config.title = TEXT("Soft3D Demo");
+	config.x = 200;
+	config.y = 200;
 	config.width = 800;
 	config.height = 480;
 	config.fullScreen = false;
+	config.hasBorder = false;
 	config.wndProc = WndProc;
 
-	RenderSystemInterface* renderSystem = new RenderSystemGL();
+	renderSystem = new RenderSystemGL();
 	renderSystem->InitalizeWindow(config);
 
 	MSG msg = {0};
@@ -34,7 +40,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE prevInstance, LPWSTR cmdLine,
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		}else{
-			Render(renderSystem);
+			Render();
 		}
 	}	
 
@@ -53,6 +59,19 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 		hDC = BeginPaint(hwnd, &ps);
 		EndPaint(hwnd, &ps);
 		break;
+	case WM_SIZE:
+		renderSystem->OnChangeSize(LOWORD(lParam), HIWORD(lParam));
+		break;
+
+	case WM_KEYDOWN:
+		switch (wParam)
+		{
+		case VK_ESCAPE:
+			PostQuitMessage(0);
+			break;
+		default:
+			break;
+		}
 
 	case WM_DESTROY:
 		PostQuitMessage(0);

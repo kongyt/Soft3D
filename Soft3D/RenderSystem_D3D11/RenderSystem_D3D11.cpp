@@ -16,7 +16,7 @@ namespace Soft3D {
 	}
 
 	Viewport RenderSystemD3D11::GetViewport() {
-		return Viewport();
+		return Viewport(0,0);
 	}
 
 	void RenderSystemD3D11::Clear(const Color& color) {
