@@ -4,6 +4,7 @@
 #include <string.h>
 #include <math.h>
 
+#include "DllApi.h"
 #include "Types.h"
 #include "MathUtils.h"
 #include "Vector3.h"
@@ -27,11 +28,13 @@
 
 namespace Soft3D {
 
-	class Matrix4 {
+	class DLLAPI Matrix4 {
 	public:
 		Matrix4();
 		Matrix4(Float data[16]);
-		Matrix4* Clone();
+		Matrix4* Clone();	
+
+		Matrix4& CopyData(const Matrix4& mat4);
 
 		Matrix4& Add(const Matrix4& mat4);
 		Matrix4& Sub(const Matrix4& mat4);
@@ -49,7 +52,6 @@ namespace Soft3D {
 		Matrix4& RotateX(Float rotation);
 		Matrix4& RotateY(Float rotation);
 		Matrix4& RotateZ(Float rotation);
-
 
 	public:
 		Float data[16];

@@ -1,12 +1,19 @@
-#ifndef _Render_System_D3D11_H__
-#define _Render_System_D3D11_H__
+#ifndef _Render_System_GL_H__
+#define _Render_System_GL_H__
+
+#include <Windows.h>
+#include <GL/GL.h>
+#include <GL/GLU.h>
+
+#pragma comment(lib, "glu32.lib")
+#pragma comment(lib, "opengl32.lib")
 
 #include "../Soft3D/DllApi.h"
 #include "../Soft3D/RenderSystemInterface.h"
 
 namespace Soft3D{
 
-	class DLLAPI RenderSystemD3D11: public RenderSystemInterface{
+	class DLLAPI RenderSystemGL: public RenderSystemInterface{
 	public:
 		Bool InitalizeWindow(const RenderConfig& config);        // 渲染窗口初始化
 		void DestoryWindow();                             // 渲染窗口销毁
@@ -59,7 +66,19 @@ namespace Soft3D{
 		void DelShader(UInt  shaderId);            // 卸载shader
 		void EnableShader(UInt shaderId);          // 启用shader
 		void DisableShader(UInt shaderId);         // 关闭shader
-	
+
+	private:
+		void SetupPixelFormat(HDC hDC);
+		void InitGL();
+	private:
+		HINSTANCE m_hInstance;
+		HWND      m_hWnd;
+		HDC       m_HDC;
+		Color     m_brushColor;
+		Matrix4   m_projectionMatrix;
+		Matrix4   m_transformMatrix;
+		Float     m_pointSize;
+		Float     m_lineWidth;
 	};
 
 }

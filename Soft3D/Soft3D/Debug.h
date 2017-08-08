@@ -1,6 +1,7 @@
 #ifndef _Debug_H__
 #define _Debug_H__
 
+#include "DllApi.h"
 #include "Vector2.h"
 #include "Vector3.h"
 #include "Color.h"
@@ -9,7 +10,7 @@
 
 namespace Soft3D {
 
-	class Debug{
+	class DLLAPI Debug{
 	public:
 		static void Log(const char* message);
 		static void Log(const String& message);

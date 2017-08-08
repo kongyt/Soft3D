@@ -3,9 +3,9 @@
 
 namespace Soft3D {
 
-	class Shader {
+	class DLLAPI Shader {
 	public:
-
+		UInt shaderId;
 	};
 
 }

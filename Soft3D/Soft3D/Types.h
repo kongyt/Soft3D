@@ -15,6 +15,7 @@ namespace Soft3D{
 	typedef bool             Bool;
 	typedef float            Float;
 	typedef double           Double;
+	typedef long             Long;
 	typedef std::string      String;
 	typedef std::wstring     WString;
 

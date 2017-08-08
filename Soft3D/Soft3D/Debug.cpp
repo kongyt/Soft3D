@@ -13,11 +13,11 @@ namespace Soft3D {
 	}
 
 	void Debug::Log(const Vector2& vec2) {
-		fprintf(stderr, "Vector2(%f, %f)\n", vec2.a, vec2.b);
+		fprintf(stderr, "Vector2(%f, %f)\n", vec2.x, vec2.y);
 	}
 
 	void Debug::Log(const Vector3& vec3) {
-		fprintf(stderr, "Vector3(%f, %f, %f)\n", vec3.a, vec3.b, vec3.c);
+		fprintf(stderr, "Vector3(%f, %f, %f)\n", vec3.x, vec3.y, vec3.z);
 	}
 
 	void Debug::Log(const Color& color){

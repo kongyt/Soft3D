@@ -18,6 +18,14 @@ namespace Soft3D {
 		return new Matrix4(data);
 	}
 
+	Matrix4& Matrix4::CopyData(const Matrix4& mat4) {
+		for (int i = 0; i < 16; i++) {
+			data[i] = mat4.data[i];
+		}
+
+		return *this;
+	}
+	
 	Matrix4& Matrix4::Add(const Matrix4& mat4) {
 		for (int i = 0; i < 16; i++) {
 			data[i] += mat4.data[i];
@@ -144,46 +152,46 @@ namespace Soft3D {
 
 	Matrix4& Matrix4::SetScale(const Vector3& scale) {
 		Identity();
-		data[M00] = scale.a;
-		data[M11] = scale.b;
-		data[M22] = scale.c;
+		data[M00] = scale.x;
+		data[M11] = scale.y;
+		data[M22] = scale.z;
 
 		return *this;
 	}
 
 	Matrix4& Matrix4::SetTranslate(const Vector3& trans) {
 		Identity();
-		data[M03] = trans.a;
-		data[M13] = trans.b;
-		data[M23] = trans.c;
+		data[M03] = trans.x;
+		data[M13] = trans.y;
+		data[M23] = trans.z;
 
 		return *this;
 	}
 
 	Matrix4& Matrix4::Scale(const Vector3& scale) {
-		data[M00] *= scale.a;
-		data[M10] *= scale.a;
-		data[M20] *= scale.a;
-		data[M30] *= scale.a;
+		data[M00] *= scale.x;
+		data[M10] *= scale.x;
+		data[M20] *= scale.x;
+		data[M30] *= scale.x;
 
-		data[M01] *= scale.b;
-		data[M11] *= scale.b;
-		data[M21] *= scale.b;
-		data[M31] *= scale.b;
+		data[M01] *= scale.y;
+		data[M11] *= scale.y;
+		data[M21] *= scale.y;
+		data[M31] *= scale.y;
 
-		data[M02] *= scale.c;
-		data[M12] *= scale.c;
-		data[M22] *= scale.c;
-		data[M32] *= scale.c;
+		data[M02] *= scale.z;
+		data[M12] *= scale.z;
+		data[M22] *= scale.z;
+		data[M32] *= scale.z;
 
 		return *this;
 	}
 
 	Matrix4& Matrix4::Translate(const Vector3& trans) {
-		data[M03] = data[M00] * trans.a + data[M01] * trans.b + data[M02] * trans.c + data[M03];
-		data[M13] = data[M10] * trans.a + data[M11] * trans.b + data[M12] * trans.c + data[M13];
-		data[M23] = data[M20] * trans.a + data[M21] * trans.b + data[M22] * trans.c + data[M23];
-		data[M33] = data[M30] * trans.a + data[M31] * trans.b + data[M32] * trans.c + data[M33];
+		data[M03] = data[M00] * trans.x + data[M01] * trans.y + data[M02] * trans.z + data[M03];
+		data[M13] = data[M10] * trans.x + data[M11] * trans.y + data[M12] * trans.z + data[M13];
+		data[M23] = data[M20] * trans.x + data[M21] * trans.y + data[M22] * trans.z + data[M23];
+		data[M33] = data[M30] * trans.x + data[M31] * trans.y + data[M32] * trans.z + data[M33];
 
 		return *this;
 	}
@@ -232,5 +240,4 @@ namespace Soft3D {
 
 		return this->Mul(tmp);
 	}	
-
 }

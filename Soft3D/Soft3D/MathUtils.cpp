@@ -19,6 +19,10 @@ namespace Soft3D {
 		}
 	}
 
+	Bool MathUtils::IsEqual(Float val1, Float val2){
+		return IsZero(val1 - val2);
+	}
+
 	Float MathUtils::Rad2Deg(Float radian) {
 		return radian * 180.0f / Pi();
 	}

@@ -1,6 +1,8 @@
 #ifndef _Render_System_Interface_H__
 #define _Render_System_Interface_H__
 
+#include "DllApi.h"
+
 #include <windows.h>
 
 #include "Types.h"
@@ -15,18 +17,18 @@
 
 namespace Soft3D{
 
-struct RenderConfig{
+struct DLLAPI RenderConfig{
 	HINSTANCE hInstance;        // 程序实例
+	TCHAR*    title;            // 标题
 	Bool      fullScreen;       // 是否全屏
-	UInt      width;            // 非全屏时窗口客户区宽度
-	UInt      height;           // 非全屏时窗口客户区高度
+	Long      width;            // 非全屏时窗口客户区宽度
+	Long      height;           // 非全屏时窗口客户区高度
 	WNDPROC   wndProc;          // 消息处理函数
 };
 
-class RenderSystemInterface{
+class DLLAPI RenderSystemInterface{
 public:
-    virtual Bool InitalizeWindow(RenderConfig config) = 0;    // 渲染窗口初始化
-    virtual void Render() = 0;                                // 渲染帧
+    virtual Bool InitalizeWindow(const RenderConfig& config) = 0;    // 渲染窗口初始化
     virtual void DestoryWindow() = 0;                         // 渲染窗口销毁
 
     virtual void SetViewport(const Viewport& viewport) = 0;   // 设置视口
@@ -36,11 +38,11 @@ public:
     virtual void Flush() = 0;                           // 刷新缓冲区
     virtual void SwapBuffer() = 0;                      // 交换缓冲区
 
-    virtual void SetPointSize(UInt size) = 0;   // 设置点的大小
-    virtual UInt GetPointSize() = 0;            // 返回点的大小
+    virtual void SetPointSize(Float size) = 0;   // 设置点的大小
+    virtual Float GetPointSize() = 0;            // 返回点的大小
 
-    virtual void SetLineWidth(UInt width) = 0;  // 设置线的宽度
-    virtual UInt GetLineWidth() = 0;                // 返回线宽
+    virtual void SetLineWidth(Float width) = 0;  // 设置线的宽度
+    virtual Float GetLineWidth() = 0;                // 返回线宽
 
     virtual void SetBrushColor(const Color& color) = 0; // 设置画笔颜色
     virtual Color GetBrushColor() = 0;                  // 返回画笔颜色

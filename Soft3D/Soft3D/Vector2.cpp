@@ -4,44 +4,44 @@
 namespace Soft3D {
 
 	Vector2::Vector2() {
-		this->a = 0.0f;
-		this->b = 0.0f;
+		this->x = 0.0f;
+		this->y = 0.0f;
 	}
 
-	Vector2::Vector2(Float a, Float b) {
-		this->a = a;
-		this->b = b;
+	Vector2::Vector2(Float x, Float y) {
+		this->x = x;
+		this->y = y;
 	}
 
 	Vector2* Vector2::Clone() {
-		return new Vector2(a, b);
+		return new Vector2(x, y);
 	}
 	
 	Vector2& Vector2::Add(const Vector2& rhs) {
-		this->a += rhs.a;
-		this->b += rhs.b;
+		this->x += rhs.x;
+		this->y += rhs.y;
 
 		return *this;
 	}
 
 	Vector2& Vector2::Sub(const Vector2& rhs) {
-		this->a -= rhs.a;
-		this->b -= rhs.b;
+		this->x -= rhs.x;
+		this->y -= rhs.y;
 
 		return *this;
 	}
 
 	Vector2& Vector2::Mul(Float rhs) {
-		this->a * rhs;
-		this->b * rhs;
+		this->x *= rhs;
+		this->y *= rhs;
 
 		return *this;
 	}
 
 	Vector2& Vector2::Div(Float rhs) {
 		if (MathUtils::IsZero(rhs) != true) {
-			this->a / rhs;
-			this->b / rhs;
+			this->x /= rhs;
+			this->y /= rhs;
 		}		
 
 		return *this;

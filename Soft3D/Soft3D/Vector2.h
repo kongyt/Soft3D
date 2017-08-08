@@ -1,14 +1,15 @@
 #ifndef _Vector2_H__
 #define _Vector2_H__
 
+#include "DllApi.h"
 #include "Types.h"
 
 namespace Soft3D {
 
-	class Vector2 {
+	class DLLAPI Vector2 {
 	public:
 		Vector2();
-		Vector2(Float a, Float b);
+		Vector2(Float x, Float y);
 		Vector2* Clone();
 
 		Vector2& Add(const Vector2& rhs);
@@ -18,8 +19,8 @@ namespace Soft3D {
 
 
 	public:
-		Float a;
-		Float b;
+		Float x;
+		Float y;
 
 	};
 

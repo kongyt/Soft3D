@@ -1,9 +1,11 @@
 #ifndef _Blend_Mode_H__
 #define _Blend_Mode_H__
 
+#include "DllApi.h"
+
 namespace Soft3D {
 
-	class BlendMode {
+	class DLLAPI BlendMode {
 	public:
 
 	};

@@ -1,13 +1,15 @@
 #ifndef _Quaternion_H__
 #define _Quaternion_H__
 
+#include "DllApi.h"
+
 #include "Types.h"
 #include "MathUtils.h"
 #include "Vector3.h"
 
 namespace Soft3D {
 
-	class Quaternion {
+	class DLLAPI Quaternion {
 	public:
 		Quaternion();
 		Quaternion(Float x, Float y, Float z, Float w);
