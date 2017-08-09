@@ -82,10 +82,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="GLShaderManager.h" />
     <ClInclude Include="RenderSystem_GL.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="RenderSystemGL.cpp" />
+    <ClCompile Include="GLShaderManager.cpp" />
+    <ClCompile Include="RenderSystem_GL.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

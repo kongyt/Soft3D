@@ -75,6 +75,8 @@ public:
     virtual void EnableLight(UInt light) = 0;          // 开启灯光
     virtual void DisableLight(UInt light) = 0;         // 关闭灯光
 
+	virtual void EnableBlend() = 0;                    // 启用混合
+	virtual void DisableBlend() = 0;                   // 关闭混合
     virtual void SetBlendMode(const BlendMode& blendMode) = 0;    // 设置混合模式
     virtual BlendMode GetBlendMode() = 0;                         // 返回混合模式
 

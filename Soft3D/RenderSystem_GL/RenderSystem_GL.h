@@ -10,6 +10,7 @@
 
 #include "../Soft3D/DllApi.h"
 #include "../Soft3D/RenderSystemInterface.h"
+#include "GLShaderManager.h"
 
 namespace Soft3D{
 
@@ -57,6 +58,8 @@ namespace Soft3D{
 		void EnableLight(UInt light);              // 开启灯光
 		void DisableLight(UInt light);             // 关闭灯光
 
+		void EnableBlend();                        // 启用混合
+		void DisableBlend();                       // 关闭混合
 		void SetBlendMode(const BlendMode& blendMode);        // 设置混合模式
 		BlendMode GetBlendMode();                             // 返回混合模式
 
@@ -82,6 +85,11 @@ namespace Soft3D{
 		Matrix4   m_transformMatrix;
 		Float     m_pointSize;
 		Float     m_lineWidth;
+		Bool      m_usedDepthTest;
+		Bool      m_usedStencilTest;
+		Bool      m_usedBlend;
+		BlendMode m_blendMode;
+		GLShaderManager m_glShaderManager;
 	};
 
 }

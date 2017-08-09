@@ -11,6 +11,10 @@ namespace Soft3D {
 
 	}
 
+	void RenderSystemD3D11::OnChangeSize(UInt width, UInt height) {
+		
+	}
+
 	void RenderSystemD3D11::SetViewport(const Viewport& viewport) {
 
 	}

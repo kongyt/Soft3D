@@ -203,18 +203,22 @@ namespace Soft3D{
 	}
 
 	void RenderSystemGL::EnableDepthTest(){
+		m_usedDepthTest = true;
 		glEnable(GL_DEPTH_TEST);		// ∆Ù”√…Ó∂»≤‚ ‘
 	}
 
 	void RenderSystemGL::DisableDepthTest(){
+		m_usedDepthTest = false;
 		glDisable(GL_DEPTH_TEST);
 	}
 
 	void RenderSystemGL::EnableStencilTest(){
+		m_usedStencilTest = true;
 		glEnable(GL_STENCIL_TEST);
 	}
 
 	void RenderSystemGL::DisableStencilTest(){
+		m_usedStencilTest = false;
 		glDisable(GL_STENCIL_TEST);
 	}
 	
@@ -250,12 +254,68 @@ namespace Soft3D{
 	
 	}
 
+	void RenderSystemGL::EnableBlend() {
+		m_usedBlend = true;
+		glEnable(GL_BLEND);
+	}
+
+	void RenderSystemGL::DisableBlend() {
+		m_usedBlend = false;
+		glDisable(GL_BLEND);
+	}
+
+	GLenum GetBlendType(const Blend& blend) {
+		GLenum rs = GL_ZERO;
+		switch (blend)
+		{
+		case Blend::Zero:
+			rs = GL_ZERO;
+			break;
+		case Blend::One:
+			rs = GL_ONE;
+			break;
+		case Blend::Src_Color:
+			rs = GL_SRC_COLOR;
+			break;
+		case Blend::One_Minus_Src_Color:
+			rs = GL_ONE_MINUS_SRC_COLOR;
+			break;
+		case Blend::Dst_Color:
+			rs = GL_DST_COLOR;
+			break;
+		case Blend::One_Minus_Dst_Color:
+			rs = GL_ONE_MINUS_DST_COLOR;
+			break;
+		case Blend::Src_Alpha:
+			rs = GL_SRC_ALPHA;
+			break;
+		case Blend::One_Minus_Src_Alpha:
+			rs = GL_ONE_MINUS_SRC_ALPHA;
+			break;
+		case Blend::Dst_Alpha:
+			rs = GL_DST_ALPHA;
+			break;
+		case Blend::One_Minus_Dst_Alpha:
+			rs = GL_ONE_MINUS_DST_ALPHA;
+			break;
+		case Blend::Src_Alpha_Saturate:
+			rs = GL_SRC_ALPHA_SATURATE;
+			break;
+		default:
+			exit(-1000);
+			break;
+		}
+		return rs;
+	}
+
 	void RenderSystemGL::SetBlendMode(const BlendMode& blendMode){
-	
+		m_blendMode.srcBlend = blendMode.srcBlend;
+		m_blendMode.dstBlend = blendMode.dstBlend;
+		glBlendFunc(GetBlendType(blendMode.srcBlend), GetBlendType(blendMode.dstBlend));
 	}
 
 	BlendMode RenderSystemGL::GetBlendMode(){
-		return BlendMode();
+		return m_blendMode;
 	}
 
 	void RenderSystemGL::CachePrimitivew(Primitivew primit){

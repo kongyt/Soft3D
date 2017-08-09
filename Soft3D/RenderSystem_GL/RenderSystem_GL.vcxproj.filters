@@ -18,9 +18,15 @@
     <ClInclude Include="RenderSystem_GL.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="GLShaderManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="RenderSystemGL.cpp">
+    <ClCompile Include="RenderSystem_GL.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GLShaderManager.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

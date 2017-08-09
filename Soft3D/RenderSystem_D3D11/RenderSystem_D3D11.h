@@ -10,6 +10,7 @@ namespace Soft3D{
 	public:
 		Bool InitalizeWindow(const RenderConfig& config);        // 渲染窗口初始化
 		void DestoryWindow();                             // 渲染窗口销毁
+		void OnChangeSize(UInt width, UInt height);       // 窗口大小改变
 
 		void SetViewport(const Viewport& viewport);       // 设置视口
 		Viewport GetViewport();                           // 返回视口
