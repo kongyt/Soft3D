@@ -6,7 +6,6 @@
 
 #include "DllApi.h"
 #include "Types.h"
-#include "MathUtils.h"
 #include "Vector3.h"
 
 #define M00		0

@@ -1,4 +1,5 @@
 #include "Frustum.h"
+#include "MathUtils.h"
 
 namespace Soft3D {
 
@@ -98,7 +99,9 @@ namespace Soft3D {
 		Vector3 forward = camera.GetForwardVector();
 		Vector3 up = camera.GetUpVector();
 		Vector3 origin = camera.GetOrigin();
-		Vector3 cross = MathUtils::CrossProduct(up, forward);
+		Vector3 cross;
+		
+		MathUtils::CrossProduct3(cross, up, forward);
 
 		rotMat.data[M00] = cross.x;
 		rotMat.data[M10] = cross.y;

@@ -1,4 +1,5 @@
 #include "Matrix4.h"
+#include "MathUtils.h"
 
 namespace Soft3D {
 

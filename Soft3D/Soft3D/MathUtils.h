@@ -8,7 +8,7 @@
 #include "Vector4.h"
 #include "Matrix4.h"
 
-namespace Soft3D {
+namespace Soft3D {	
 
 	class DLLAPI MathUtils {
 	public:

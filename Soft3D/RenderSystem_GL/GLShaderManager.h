@@ -4,9 +4,7 @@
 #include <map>
 
 #include <Windows.h>
-#include <GL/GL.h>
-#include <GL/GLU.h>
-#include <GL/glew.h>
+#include <gl/glew.h>
 
 #include "../Soft3D/DllApi.h"
 #include "../Soft3D/Types.h"
@@ -14,7 +12,7 @@
 
 namespace Soft3D {
 
-	class GLShaderManager {
+	class DLLAPI GLShaderManager {
 	public:
 		UInt GetDefaultShader();
 		UInt AddShader(Shader& shader);
