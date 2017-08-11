@@ -6,7 +6,6 @@
 
 #include "DllApi.h"
 #include "Types.h"
-#include "Vector3.h"
 
 #define M00		0
 #define M10		1
@@ -26,6 +25,8 @@
 #define M33		15
 
 namespace Soft3D {
+
+	class Vector3;
 
 	class DLLAPI Matrix4 {
 	public:
@@ -51,6 +52,16 @@ namespace Soft3D {
 		Matrix4& RotateX(Float rotation);
 		Matrix4& RotateY(Float rotation);
 		Matrix4& RotateZ(Float rotation);
+
+		Matrix4& SetToProjection(Float near, Float far, Float fov, Float aspect);
+		Matrix4& SetToOrtho2D(Float x, Float y, Float width, Float height);
+		Matrix4& SetToOrtho2D(Float x, Float y, Float width, Float height, Float near, Float far);
+		Matrix4& SetToOrtho(Float left, Float right, Float bottom, Float top, Float near, Float far);
+
+		Matrix4& SetToLookAt(const Vector3& direction, const Vector3& up);
+		Matrix4& SetToLookAt(const Vector3& position, const Vector3& target, const Vector3& up);
+
+		Matrix4& SetToTranslation(const Vector3& vector);
 
 	public:
 		Float data[16];

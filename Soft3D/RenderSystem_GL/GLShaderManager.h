@@ -3,9 +3,6 @@
 
 #include <map>
 
-#include <Windows.h>
-#include <gl/glew.h>
-
 #include "../Soft3D/DllApi.h"
 #include "../Soft3D/Types.h"
 #include "../Soft3D/Shader.h"

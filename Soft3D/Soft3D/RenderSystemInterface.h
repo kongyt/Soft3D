@@ -56,8 +56,8 @@ public:
     virtual void SetProjectionMatrix(const Matrix4& projectionMatrix) = 0;    // 设置投影矩阵
     virtual Matrix4& GetProjectionMatrix() = 0;                               // 返回投影矩阵
 
-    virtual void SetTransformMatrix(const Matrix4& transformMatrix) = 0;      // 设置变换矩阵
-    virtual Matrix4& GetTransformMatrix() = 0;                                // 返回变换矩阵
+    virtual void SetModelViewMatrix(const Matrix4& viewMatrix) = 0;      // 设置变换矩阵
+    virtual Matrix4& GetModelViewMatrix() = 0;                                // 返回变换矩阵
 
     virtual void EnableDepthTest() = 0;                        // 启用深度测试
     virtual void DisableDepthTest() = 0;                       // 关闭深度测试

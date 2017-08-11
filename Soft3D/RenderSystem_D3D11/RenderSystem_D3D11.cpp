@@ -66,11 +66,11 @@ namespace Soft3D {
 		return Matrix4();
 	}
 
-	void RenderSystemD3D11::SetTransformMatrix(const Matrix4& transformMatrix) {
+	void RenderSystemD3D11::SetModelViewMatrix(const Matrix4& viewMatrix) {
 
 	}
 
-	Matrix4& RenderSystemD3D11::GetTransformMatrix() {
+	Matrix4& RenderSystemD3D11::GetModelViewMatrix() {
 		return Matrix4();
 	}
 

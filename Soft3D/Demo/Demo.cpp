@@ -4,10 +4,12 @@
 using namespace Soft3D;
 
 RenderSystemInterface* renderSystem;
+Camera* camera;
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 void Render(){
+
 	renderSystem->Clear(Color::Black);
 
 
@@ -26,11 +28,16 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE prevInstance, LPWSTR cmdLine,
 	config.width = 800;
 	config.height = 480;
 	config.fullScreen = false;
-	config.hasBorder = false;
+	config.hasBorder = true;
 	config.wndProc = WndProc;
 
 	renderSystem = new RenderSystemGL();
 	renderSystem->InitalizeWindow(config);
+
+	camera = new Camera();
+	//camera->SetToPers(60.0f, 800, 480);
+	camera->SetToOrth(false, 800, 480);
+	camera->Apply(renderSystem);
 
 	MSG msg = {0};
 	while(msg.message != WM_QUIT)

@@ -241,4 +241,110 @@ namespace Soft3D {
 
 		return this->Mul(tmp);
 	}	
+
+	Matrix4& Matrix4::SetToProjection(Float near, Float far, Float fov, Float aspect) {
+		Identity();
+		Float l_fd = 1.0f / tanf(fov * (MathUtils::Pi() / 180.0f) / 2.0f);
+		Float l_a1 = (far + near) / (near - far);
+		Float l_a2 = (2 * far * near) / (near - far);
+		data[M00] = l_fd / aspect;;
+		data[M10] = 0;
+		data[M20] = 0;
+		data[M30] = 0;
+		data[M01] = 0;
+		data[M11] = l_fd; 
+		data[M21] = 0;
+		data[M31] = 0;
+		data[M02] = 0;
+		data[M12] = 0;
+		data[M22] = l_a1;
+		data[M32] = -1;
+		data[M03] = 0;
+		data[M13] = 0;
+		data[M23] = l_a2;
+		data[M33] = 0;
+
+		return *this;
+	}
+
+	Matrix4& Matrix4::SetToOrtho2D(Float x, Float y, Float width, Float height) {
+		return SetToOrtho(x, x + width, y, y + height, 0, 1);
+	}
+
+	Matrix4& Matrix4::SetToOrtho2D(Float x, Float y, Float width, Float height, Float near, Float far) {
+		return SetToOrtho(x, x + width, y, y + height, near, far);
+	}
+
+	Matrix4& Matrix4::SetToOrtho(Float left, Float right, Float bottom, Float top, Float near, Float far) {
+		Identity();
+		Float x_orth = 2 / (right - left);
+		Float y_orth = 2 / (top - bottom);
+		Float z_orth = -2 / (far - near);
+
+		Float tx = -(right + left) / (right - left);
+		Float ty = -(top + bottom) / (top - bottom);
+		Float tz = -(far + near) / (far - near);
+
+		data[M00] = x_orth;
+		data[M10] = 0;
+		data[M20] = 0;
+		data[M30] = 0;
+		data[M01] = 0;
+		data[M11] = y_orth;
+		data[M21] = 0;
+		data[M31] = 0;
+		data[M02] = 0;
+		data[M12] = 0;
+		data[M22] = z_orth;
+		data[M32] = 0;
+		data[M03] = tx;
+		data[M13] = ty;
+		data[M23] = tz;
+		data[M33] = 1;
+
+		return *this;
+	}
+
+	Matrix4& Matrix4::SetToLookAt(const Vector3& direction, const Vector3& up) {
+		Vector3 tmp1, tmp2, tmp3;
+		tmp3.Set(direction).Nor();
+		tmp1.Set(tmp3);
+		tmp1.Crs(up).Nor();
+		tmp2.Set(tmp1).Crs(tmp3).Nor();
+
+		Identity();
+
+		data[M00] = tmp1.x;
+		data[M01] = tmp1.y;
+		data[M02] = tmp1.z;
+		data[M10] = tmp2.x;
+		data[M11] = tmp2.y;
+		data[M12] = tmp2.z;
+		data[M20] = -tmp3.x;
+		data[M21] = -tmp3.y;
+		data[M22] = -tmp3.z;
+
+		return *this;
+	}
+
+	Matrix4& Matrix4::SetToLookAt(const Vector3& position, const Vector3& target, const Vector3& up) {
+		Vector3 tmp;
+		tmp.Set(target).Sub(position);
+		SetToLookAt(tmp, up);
+
+		this->Mul(Matrix4().SetToTranslation(Vector3().Set(position).Scl(-1)));
+
+		return *this;
+	}
+
+
+	Matrix4& Matrix4::SetToTranslation(const Vector3& vector) {
+		Identity();
+
+		data[M03] = vector.x;
+		data[M13] = vector.y;
+		data[M23] = vector.z;
+
+		return *this;
+	}
 }

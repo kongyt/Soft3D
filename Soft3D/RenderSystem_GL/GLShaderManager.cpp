@@ -1,4 +1,5 @@
 #include "GLShaderManager.h"
+#include "RenderSystem_GL.h"
 
 namespace Soft3D {
 

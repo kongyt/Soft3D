@@ -41,11 +41,11 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <LibraryWPath>E:\VisualStudio工程\Soft3D\Soft3D\Soft3D\Debug;$(LibraryWPath)</LibraryWPath>
+    <LibraryWPath>E:\VisualStudio工程\Soft3D\Soft3D\3rd\glew-2.1.0\bin\Release\Win32;E:\VisualStudio工程\Soft3D\Soft3D\Soft3D\Debug;$(LibraryWPath)</LibraryWPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <LibraryWPath>E:\VisualStudio工程\Soft3D\Soft3D\Soft3D\Debug;$(LibraryWPath)</LibraryWPath>
+    <LibraryWPath>E:\VisualStudio工程\Soft3D\Soft3D\3rd\glew-2.1.0\bin\Release\Win32;E:\VisualStudio工程\Soft3D\Soft3D\Soft3D\Debug;$(LibraryWPath)</LibraryWPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

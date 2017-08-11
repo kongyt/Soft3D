@@ -12,9 +12,6 @@ namespace Soft3D {
 		fprintf(stderr, "%s%s",message.c_str(),"\n");
 	}
 
-	void Debug::Log(const Vector2& vec2) {
-		fprintf(stderr, "Vector2(%f, %f)\n", vec2.x, vec2.y);
-	}
 
 	void Debug::Log(const Vector3& vec3) {
 		fprintf(stderr, "Vector3(%f, %f, %f)\n", vec3.x, vec3.y, vec3.z);

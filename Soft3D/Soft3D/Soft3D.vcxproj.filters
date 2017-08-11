@@ -36,9 +36,6 @@
     <ClInclude Include="Quaternion.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Vector2.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Vector3.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -63,9 +60,6 @@
     <ClInclude Include="Pixmap.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Vector4.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="DllApi.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -73,6 +67,15 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GObj.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentInterface.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Plane.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -92,22 +95,19 @@
     <ClCompile Include="Quaternion.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Vector2.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Vector3.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Viewport.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Vector4.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Frustum.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Plane.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

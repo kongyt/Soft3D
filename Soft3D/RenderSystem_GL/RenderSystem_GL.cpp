@@ -129,22 +129,16 @@ namespace Soft3D{
 		glClearColor(color.r, color.g, color.b, color.a);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BITS);
 
-		GLfloat verts[] = {
-			-0.5f, 0.0f, 0.0f,
-			0.5f,  0.0f, 0.0f,
-			0.0f, 0.5f, 0.0f
-		};
-
 		glBegin(GL_TRIANGLES);
 
 		glColor3f(1.0f, 0.0f, 0.0f);
-		glVertex2f(0.0f, 0.5f);
+		glVertex3f(0, 0.0f, -1000.0f);
 
 		glColor3f(0.0f, 1.0f, 0.0f); 
-		glVertex2f(0.5f, -0.5f);
+		glVertex3f(800, 0.0f, -1000.0f);
 
 		glColor3f(0.0f, 0.0f, 1.0f); 
-		glVertex2f(-0.5f, -0.5f);
+		glVertex3f(800, 480, -1000.0f);
 
 		glEnd();
 		glPopMatrix();
@@ -188,18 +182,22 @@ namespace Soft3D{
     
 	void RenderSystemGL::SetProjectionMatrix(const Matrix4& projectionMatrix){
 		m_projectionMatrix.CopyData(projectionMatrix);
+		glMatrixMode(GL_PROJECTION);
+		glLoadMatrixf(projectionMatrix.data);
 	}
 
 	Matrix4& RenderSystemGL::GetProjectionMatrix(){
 		return m_projectionMatrix;
 	}
 
-	void RenderSystemGL::SetTransformMatrix(const Matrix4& transformMatrix){
-		m_transformMatrix.Add(transformMatrix);
+	void RenderSystemGL::SetModelViewMatrix(const Matrix4& viewMatrix){
+		m_viewMatrix.CopyData(viewMatrix);
+		glMatrixMode(GL_MODELVIEW);
+		glLoadMatrixf(viewMatrix.data);
 	}
 
-	Matrix4& RenderSystemGL::GetTransformMatrix(){
-		return m_transformMatrix;
+	Matrix4& RenderSystemGL::GetModelViewMatrix(){
+		return m_viewMatrix;
 	}
 
 	void RenderSystemGL::EnableDepthTest(){

@@ -5,7 +5,6 @@
 #include "DllApi.h"
 #include "Types.h"
 #include "Vector3.h"
-#include "Vector4.h"
 #include "Matrix4.h"
 
 namespace Soft3D {	
@@ -21,10 +20,7 @@ namespace Soft3D {
 		static Float Max(Float v1, Float v2);
 		static Float Clamp(Float value, Float v1, Float v2);
 		static Float Abs(Float val);
-		static Float Distance(const Vector3& point, const Vector4& plane);
-		static void TransformVector4(Vector4& out, const Vector4& vec4, const Matrix4& mat);
-		static void CrossProduct3(Vector3& out, const Vector3& u, const Vector3& v);
-		static void GetPointEquation(Vector4& out, const Vector3& p1, const Vector3& p2, const Vector3& p3);
+
 	};
 
 }

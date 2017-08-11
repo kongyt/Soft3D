@@ -31,8 +31,8 @@ namespace Soft3D{
 		void SetProjectionMatrix(const Matrix4& projectionMatrix);        // 设置投影矩阵
 		Matrix4& GetProjectionMatrix();                                   // 返回投影矩阵
 
-		void SetTransformMatrix(const Matrix4& transformMatrix);          // 设置变换矩阵
-		Matrix4& GetTransformMatrix();                                    // 返回变换矩阵
+		virtual void SetModelViewMatrix(const Matrix4& viewMatrix) = 0;      // 设置模型视图矩阵
+		virtual Matrix4& GetModelViewMatrix() = 0;                           // 返回模型视图矩阵
 
 		void EnableDepthTest();                            // 启用深度测试
 		void DisableDepthTest();                           // 关闭深度测试

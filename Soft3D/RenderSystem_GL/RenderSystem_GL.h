@@ -2,6 +2,7 @@
 #define _Render_System_GL_H__
 
 #include <Windows.h>
+#include "../../3rd/glew-2.1.0/include/GL/glew.h"
 #include <GL/GL.h>
 #include <GL/GLU.h>
 
@@ -39,8 +40,8 @@ namespace Soft3D{
 		void SetProjectionMatrix(const Matrix4& projectionMatrix);        // 设置投影矩阵
 		Matrix4& GetProjectionMatrix();                                   // 返回投影矩阵
 
-		void SetTransformMatrix(const Matrix4& transformMatrix);          // 设置变换矩阵
-		Matrix4& GetTransformMatrix();                                    // 返回变换矩阵
+		void SetModelViewMatrix(const Matrix4& viewMatrix);          // 设置变换矩阵
+		Matrix4& GetModelViewMatrix();                                    // 返回变换矩阵
 
 		void EnableDepthTest();                            // 启用深度测试
 		void DisableDepthTest();                           // 关闭深度测试
@@ -82,7 +83,7 @@ namespace Soft3D{
 		Viewport  m_Viewport = Viewport(0,0);
 		Color     m_brushColor;
 		Matrix4   m_projectionMatrix;
-		Matrix4   m_transformMatrix;
+		Matrix4   m_viewMatrix;
 		Float     m_pointSize;
 		Float     m_lineWidth;
 		Bool      m_usedDepthTest;
