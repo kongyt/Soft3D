@@ -13,14 +13,15 @@ namespace Soft3D {
 	public:
 		void Update(Bool updateFrustum);
 		void Apply(RenderSystemInterface* renderSystem);
+		void SetToOrth(Float viewportWidth, Float viewportHeight);
 		void SetToOrth(Bool yDown, Float viewportWidth, Float viewportHeight);
 		void SetToPers(Float fieldOfView, Float viewportWidth, Float viewportHeight);
 
 
 
 	public:
-		Vector3 m_direction = Vector3(0, 0, 10);
-		Vector3 m_up = Vector3(0, -1, 0);
+		Vector3 m_direction = Vector3(0, 0, -1);
+		Vector3 m_up = Vector3(0, 1, 0);
 
 		Vector3 m_tmp;
 		Matrix4 m_projection;
@@ -31,7 +32,7 @@ namespace Soft3D {
 		Bool isOrth;
 
 		Float m_zoom = 1.0f;
-		Float m_near = 1.0f;
+		Float m_near = 0.0f;
 		Float m_far = 1000.0f;
 		Float m_viewportWidth;
 		Float m_viewportHeight;

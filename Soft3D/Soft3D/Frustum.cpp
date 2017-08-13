@@ -3,8 +3,18 @@
 
 namespace Soft3D {
 
-	void Frustum::Update(const Matrix4& inverseProjectionView) {
+	void Frustum::Update(Matrix4& inverseProjectionView) {
 		
+		for (int i = 0; i < 8; i++) {
+			inverseProjectionView.Prj(planePoints[i]);
+		}		
+
+		planes[0].Set(planePoints[1], planePoints[0], planePoints[2]);
+		planes[1].Set(planePoints[4], planePoints[5], planePoints[7]);
+		planes[2].Set(planePoints[0], planePoints[4], planePoints[3]);
+		planes[3].Set(planePoints[5], planePoints[1], planePoints[6]);
+		planes[4].Set(planePoints[2], planePoints[3], planePoints[6]);
+		planes[5].Set(planePoints[4], planePoints[0], planePoints[1]);
 	}
 
 	Bool Frustum::PointInFrustum(const Vector3& point) {

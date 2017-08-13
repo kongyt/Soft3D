@@ -12,14 +12,23 @@ namespace Soft3D {
 	//  ”æ∞ÃÂ
 	class DLLAPI Frustum {
 	public:
-		void Update(const Matrix4& inverseProjectionView);
+		void Update(Matrix4& inverseProjectionView);
 		Bool PointInFrustum(const Vector3& point);
 		Bool SphereInFrustum(const Vector3& center, Float radis);
 		Bool SphereInFrustumWithoutNearFar(const Vector3& center, Float radius);
 		
 
 	public:
-		Vector3 planePoints[8];
+		Vector3 planePoints[8] = { 
+			Vector3(-1.0f, -1.0f, -1.0f), 
+			Vector3( 1.0f, -1.0f, -1.0f),
+			Vector3( 1.0f,  1.0f, -1.0f),
+			Vector3(-1.0f,  1.0f, -1.0f),
+			Vector3(-1.0f, -1.0f,  1.0f),
+			Vector3( 1.0f, -1.0f,  1.0f),
+			Vector3( 1.0f,  1.0f,  1.0f),
+			Vector3(-1.0f,  1.0f,  1.0f),
+		};
 		Plane planes[6];
 	};
 

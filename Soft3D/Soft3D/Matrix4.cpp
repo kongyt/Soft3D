@@ -50,13 +50,22 @@ namespace Soft3D {
 			old_data[i] = data[i];
 		}
 
-		for (int row = 0; row < 4; row++) {
-			for (int col = 0; col < 4; col++) {
-				for (int k = 0; k < 4; k++) {
-					this->data[row + col * 4] += old_data[row + k * 4] * mat4.data[k + col * 4];
-				}
-			}
-		}
+		data[M00] = old_data[M00] * mat4.data[M00] + old_data[M01] * mat4.data[M10] + old_data[M02] * mat4.data[M20] + old_data[M03] * mat4.data[M30];
+		data[M01] = old_data[M00] * mat4.data[M01] + old_data[M01] * mat4.data[M11] + old_data[M02] * mat4.data[M21] + old_data[M03] * mat4.data[M31];
+		data[M02] = old_data[M00] * mat4.data[M02] + old_data[M01] * mat4.data[M12] + old_data[M02] * mat4.data[M22] + old_data[M03] * mat4.data[M32];
+		data[M03] = old_data[M00] * mat4.data[M03] + old_data[M01] * mat4.data[M13] + old_data[M02] * mat4.data[M23] + old_data[M03] * mat4.data[M33];
+		data[M10] = old_data[M10] * mat4.data[M00] + old_data[M11] * mat4.data[M10] + old_data[M12] * mat4.data[M20] + old_data[M13] * mat4.data[M30];
+		data[M11] = old_data[M10] * mat4.data[M01] + old_data[M11] * mat4.data[M11] + old_data[M12] * mat4.data[M21] + old_data[M13] * mat4.data[M31];
+		data[M12] = old_data[M10] * mat4.data[M02] + old_data[M11] * mat4.data[M12] + old_data[M12] * mat4.data[M22] + old_data[M13] * mat4.data[M32];
+		data[M13] = old_data[M10] * mat4.data[M03] + old_data[M11] * mat4.data[M13] + old_data[M12] * mat4.data[M23] + old_data[M13] * mat4.data[M33];
+		data[M20] = old_data[M20] * mat4.data[M00] + old_data[M21] * mat4.data[M10] + old_data[M22] * mat4.data[M20] + old_data[M23] * mat4.data[M30];
+		data[M21] = old_data[M20] * mat4.data[M01] + old_data[M21] * mat4.data[M11] + old_data[M22] * mat4.data[M21] + old_data[M23] * mat4.data[M31];
+		data[M22] = old_data[M20] * mat4.data[M02] + old_data[M21] * mat4.data[M12] + old_data[M22] * mat4.data[M22] + old_data[M23] * mat4.data[M32];
+		data[M23] = old_data[M20] * mat4.data[M03] + old_data[M21] * mat4.data[M13] + old_data[M22] * mat4.data[M23] + old_data[M23] * mat4.data[M33];
+		data[M30] = old_data[M30] * mat4.data[M00] + old_data[M31] * mat4.data[M10] + old_data[M32] * mat4.data[M20] + old_data[M33] * mat4.data[M30];
+		data[M31] = old_data[M30] * mat4.data[M01] + old_data[M31] * mat4.data[M11] + old_data[M32] * mat4.data[M21] + old_data[M33] * mat4.data[M31];
+		data[M32] = old_data[M30] * mat4.data[M02] + old_data[M31] * mat4.data[M12] + old_data[M32] * mat4.data[M22] + old_data[M33] * mat4.data[M32];
+		data[M33] = old_data[M30] * mat4.data[M03] + old_data[M31] * mat4.data[M13] + old_data[M32] * mat4.data[M23] + old_data[M33] * mat4.data[M33];
 
 		return *this;
 	}
@@ -70,19 +79,25 @@ namespace Soft3D {
 		return *this;
 	}
 
-	Matrix4& Matrix4::Inverse() {
-		Float l_det = data[M30] * data[M21] * data[M12] * data[M03] - data[M20] * data[M31] * data[M12] * data[M03] - data[M30] * data[M11]
-			* data[M22] * data[M03] + data[M10] * data[M31] * data[M22] * data[M03] + data[M20] * data[M11] * data[M32] * data[M03] - data[M10]
-			* data[M21] * data[M32] * data[M03] - data[M30] * data[M21] * data[M02] * data[M13] + data[M20] * data[M31] * data[M02] * data[M13]
-			+ data[M30] * data[M01] * data[M22] * data[M13] - data[M00] * data[M31] * data[M22] * data[M13] - data[M20] * data[M01] * data[M32]
-			* data[M13] + data[M00] * data[M21] * data[M32] * data[M13] + data[M30] * data[M11] * data[M02] * data[M23] - data[M10] * data[M31]
-			* data[M02] * data[M23] - data[M30] * data[M01] * data[M12] * data[M23] + data[M00] * data[M31] * data[M12] * data[M23] + data[M10]
-			* data[M01] * data[M32] * data[M23] - data[M00] * data[M11] * data[M32] * data[M23] - data[M20] * data[M11] * data[M02] * data[M33]
-			+ data[M10] * data[M21] * data[M02] * data[M33] + data[M20] * data[M01] * data[M12] * data[M33] - data[M00] * data[M21] * data[M12]
-			* data[M33] - data[M10] * data[M01] * data[M22] * data[M33] + data[M00] * data[M11] * data[M22] * data[M33];
+	Double Matrix4::Det() {
+		return data[M30] * data[M21] * data[M12] * data[M03] - data[M20] * data[M31] * data[M12] * data[M03] - 
+			data[M30] * data[M11] * data[M22] * data[M03] + data[M10] * data[M31] * data[M22] * data[M03] + 
+			data[M20] * data[M11] * data[M32] * data[M03] - data[M10] * data[M21] * data[M32] * data[M03] - 
+			data[M30] * data[M21] * data[M02] * data[M13] + data[M20] * data[M31] * data[M02] * data[M13] + 
+			data[M30] * data[M01] * data[M22] * data[M13] - data[M00] * data[M31] * data[M22] * data[M13] - 
+			data[M20] * data[M01] * data[M32] * data[M13] + data[M00] * data[M21] * data[M32] * data[M13] + 
+			data[M30] * data[M11] * data[M02] * data[M23] - data[M10] * data[M31] * data[M02] * data[M23] -
+			data[M30] * data[M01] * data[M12] * data[M23] + data[M00] * data[M31] * data[M12] * data[M23] + 
+			data[M10] * data[M01] * data[M32] * data[M23] - data[M00] * data[M11] * data[M32] * data[M23] - 
+			data[M20] * data[M11] * data[M02] * data[M33] + data[M10] * data[M21] * data[M02] * data[M33] + 
+			data[M20] * data[M01] * data[M12] * data[M33] - data[M00] * data[M21] * data[M12] * data[M33] -
+			data[M10] * data[M01] * data[M22] * data[M33] + data[M00] * data[M11] * data[M22] * data[M33];
+	}
 
-		if (MathUtils::IsZero(l_det) == false) {
-			Float inv_det = 1.0f / l_det;
+	Matrix4& Matrix4::Inverse() {
+		Double l_det = Det();
+
+		if (MathUtils::IsZero(l_det) == false) {	// double类型，float精度不够
 			Float tmp[16] = { 0 };
 			tmp[M00] = data[M12] * data[M23] * data[M31] - data[M13] * data[M22] * data[M31] + data[M13] * data[M21] * data[M32] - data[M11]
 				* data[M23] * data[M32] - data[M12] * data[M21] * data[M33] + data[M11] * data[M22] * data[M33];
@@ -116,6 +131,8 @@ namespace Soft3D {
 				* data[M12] * data[M31] + data[M01] * data[M10] * data[M32] - data[M00] * data[M11] * data[M32];
 			tmp[M33] = data[M01] * data[M12] * data[M20] - data[M02] * data[M11] * data[M20] + data[M02] * data[M10] * data[M21] - data[M00]
 				* data[M12] * data[M21] - data[M01] * data[M10] * data[M22] + data[M00] * data[M11] * data[M22];
+			
+			Float inv_det = 1.0f / l_det;
 			data[M00] = tmp[M00] * inv_det;
 			data[M01] = tmp[M01] * inv_det;
 			data[M02] = tmp[M02] * inv_det;
@@ -242,6 +259,16 @@ namespace Soft3D {
 		return this->Mul(tmp);
 	}	
 
+	void Matrix4::Prj(Vector3& point) {
+		Float inv_w = 1.0f / (point.x * data[M30] + point.y * data[M31] + point.z * data[M32] + data[M33]);
+		Float x = (point.x * data[M00] + point.y * data[M01] + point.z * data[M02] + data[M03]) * inv_w;
+		Float y = (point.x * data[M10] + point.y * data[M11] + point.z * data[M12] + data[M13]) * inv_w;
+		Float z = (point.x * data[M20] + point.y * data[M21] + point.z * data[M22] + data[M23]) * inv_w;
+		point.x = x;
+		point.y = y;
+		point.z = z;
+	}
+
 	Matrix4& Matrix4::SetToProjection(Float near, Float far, Float fov, Float aspect) {
 		Identity();
 		Float l_fd = 1.0f / tanf(fov * (MathUtils::Pi() / 180.0f) / 2.0f);
@@ -332,7 +359,9 @@ namespace Soft3D {
 		tmp.Set(target).Sub(position);
 		SetToLookAt(tmp, up);
 
-		this->Mul(Matrix4().SetToTranslation(Vector3().Set(position).Scl(-1)));
+		tmp.Set(position).Scl(-1.0f);
+
+		this->Mul(Matrix4().SetToTranslation(tmp));
 
 		return *this;
 	}

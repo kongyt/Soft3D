@@ -135,10 +135,10 @@ namespace Soft3D{
 		glVertex3f(0, 0.0f, -1000.0f);
 
 		glColor3f(0.0f, 1.0f, 0.0f); 
-		glVertex3f(800, 0.0f, -1000.0f);
+		glVertex3f(400, 0.0f, -1000.0f);
 
 		glColor3f(0.0f, 0.0f, 1.0f); 
-		glVertex3f(800, 480, -1000.0f);
+		glVertex3f(400, 240, -1000.0f);
 
 		glEnd();
 		glPopMatrix();

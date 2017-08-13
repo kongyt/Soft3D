@@ -27,6 +27,10 @@ namespace Soft3D {
 		renderSystem->SetModelViewMatrix(m_view);
 	}
 
+	void Camera::SetToOrth(Float viewportWidth, Float viewportHeight) {
+		SetToOrth(false, viewportWidth, viewportHeight);
+	}
+
 	void Camera::SetToOrth(Bool yDown, Float viewportWidth, Float viewportHeight) {
 		this->isOrth = true;
 		if (yDown) {

@@ -10,8 +10,17 @@ namespace Soft3D {
 		return 3.1415927f;
 	}
 
+	Bool  MathUtils::IsZero(Double val) {
+		if (abs(val) < 0.0000000000000001) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	Bool MathUtils::IsZero(Float val) {
-		if (Abs(val) < Epsilon()) {
+		if (abs(val) < 0.000001f) {
 			return true;
 		}
 		else {

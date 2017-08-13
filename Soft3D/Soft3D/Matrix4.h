@@ -41,6 +41,7 @@ namespace Soft3D {
 		Matrix4& Mul(const Matrix4& mat4);
 
 		Matrix4& Identity();
+		Double Det();
 		Matrix4& Inverse();
 		Matrix4& Transpose();
 
@@ -52,6 +53,8 @@ namespace Soft3D {
 		Matrix4& RotateX(Float rotation);
 		Matrix4& RotateY(Float rotation);
 		Matrix4& RotateZ(Float rotation);
+
+		void Prj(Vector3& point);
 
 		Matrix4& SetToProjection(Float near, Float far, Float fov, Float aspect);
 		Matrix4& SetToOrtho2D(Float x, Float y, Float width, Float height);

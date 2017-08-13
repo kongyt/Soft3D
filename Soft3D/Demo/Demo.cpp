@@ -36,7 +36,11 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE prevInstance, LPWSTR cmdLine,
 
 	camera = new Camera();
 	//camera->SetToPers(60.0f, 800, 480);
-	camera->SetToOrth(false, 800, 480);
+	camera->SetToOrth(800, 480);
+	//Vector3 tmp;
+	//tmp.Set(1, 2, -3);
+	//camera->m_projection.Prj(tmp);
+	//bool rs = camera->m_frustum.PointInFrustum(tmp);
 	camera->Apply(renderSystem);
 
 	MSG msg = {0};

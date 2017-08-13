@@ -13,6 +13,7 @@ namespace Soft3D {
 	public:
 		static Float Epsilon();		
 		static Float Pi();
+		static Bool  IsZero(Double val);
 		static Bool  IsZero(Float val);
 		static Bool  IsEqual(Float val1, Float val2);
 		static Float Rad2Deg(Float radian);
