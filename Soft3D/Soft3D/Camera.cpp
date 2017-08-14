@@ -13,18 +13,17 @@ namespace Soft3D {
 		}
 
 		m_view.SetToLookAt(position, m_tmp.Set(position).Add(m_direction), m_up);
-		m_combined.CopyData(m_projection).Mul(m_view);
+		m_combined.Set(m_projection).Mul(m_view);
 
 		if (updateFrustum) {
-			m_invProjectionView.CopyData(m_combined);
+			m_invProjectionView.Set(m_combined);
 			m_invProjectionView.Inverse();
 			m_frustum.Update(m_invProjectionView);
 		}
 	}
 
 	void Camera::Apply(RenderSystemInterface* renderSystem) {
-		renderSystem->SetProjectionMatrix(m_projection);
-		renderSystem->SetModelViewMatrix(m_view);
+		renderSystem->SetCombinedMatrix(m_combined);
 	}
 
 	void Camera::SetToOrth(Float viewportWidth, Float viewportHeight) {

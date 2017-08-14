@@ -1,6 +1,8 @@
 #ifndef _Render_System_GL_H__
 #define _Render_System_GL_H__
 
+#include <stack>
+
 #include <Windows.h>
 #include "../../3rd/glew-2.1.0/include/GL/glew.h"
 #include <GL/GL.h>
@@ -36,12 +38,11 @@ namespace Soft3D{
 
 		void SetBrushColor(const Color& color);     // 设置画笔颜色
 		Color GetBrushColor();                      // 返回画笔颜色
-    
-		void SetProjectionMatrix(const Matrix4& projectionMatrix);        // 设置投影矩阵
-		Matrix4& GetProjectionMatrix();                                   // 返回投影矩阵
 
-		void SetModelViewMatrix(const Matrix4& viewMatrix);          // 设置变换矩阵
-		Matrix4& GetModelViewMatrix();                                    // 返回变换矩阵
+		void SetCombinedMatrix(Matrix4& combined);          // 设置Camera的Combined矩阵
+		void PushTransformMatrix(Matrix4& transformMatrix); // 压入变换矩阵
+		void PopTransformMatrix();                          // 弹出变换矩阵
+
 
 		void EnableDepthTest();                            // 启用深度测试
 		void DisableDepthTest();                           // 关闭深度测试
@@ -64,8 +65,8 @@ namespace Soft3D{
 		void SetBlendMode(const BlendMode& blendMode);        // 设置混合模式
 		BlendMode GetBlendMode();                             // 返回混合模式
 
-		void CachePrimitivew(Primitivew primit);           // 缓存图元，利用顶点缓冲区
-		void DrawPrimitivew(const Primitivew& primit);     // 绘制图元
+		void CacheRenderData(RenderData& renderData);       // 缓存渲染对象
+		void DrawRenderObject(RenderObject& renderObject); // 绘制渲染对象
     
 		UInt AddShader(Shader& shader);            // 编译并添加Shader
 		void DelShader(UInt  shaderId);            // 卸载shader
@@ -82,8 +83,7 @@ namespace Soft3D{
 		HGLRC     m_HRC;	// opengl 绘制环境
 		Viewport  m_Viewport = Viewport(0,0);
 		Color     m_brushColor;
-		Matrix4   m_projectionMatrix;
-		Matrix4   m_viewMatrix;
+		
 		Float     m_pointSize;
 		Float     m_lineWidth;
 		Bool      m_usedDepthTest;
@@ -91,6 +91,9 @@ namespace Soft3D{
 		Bool      m_usedBlend;
 		BlendMode m_blendMode;
 		GLShaderManager m_glShaderManager;
+		std::stack<Matrix4*> m_transMatrixStack;
+		Matrix4   m_currentTransMatrix;
+
 	};
 
 }

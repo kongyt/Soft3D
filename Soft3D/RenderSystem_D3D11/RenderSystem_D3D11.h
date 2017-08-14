@@ -31,8 +31,9 @@ namespace Soft3D{
 		void SetProjectionMatrix(const Matrix4& projectionMatrix);        // 设置投影矩阵
 		Matrix4& GetProjectionMatrix();                                   // 返回投影矩阵
 
-		virtual void SetModelViewMatrix(const Matrix4& viewMatrix) = 0;      // 设置模型视图矩阵
-		virtual Matrix4& GetModelViewMatrix() = 0;                           // 返回模型视图矩阵
+		void SetCombinedMatrix(Matrix4& combined);          // 设置Camera的Combined矩阵
+		void PushTransformMatrix(Matrix4& transformMatrix); // 压入变换矩阵
+		void PopTransformMatrix();                          // 弹出变换矩阵
 
 		void EnableDepthTest();                            // 启用深度测试
 		void DisableDepthTest();                           // 关闭深度测试
@@ -53,9 +54,9 @@ namespace Soft3D{
 		void SetBlendMode(const BlendMode& blendMode);        // 设置混合模式
 		BlendMode GetBlendMode();                             // 返回混合模式
 
-		void CachePrimitivew(Primitivew primit);           // 缓存图元，利用顶点缓冲区
-		void DrawPrimitivew(const Primitivew& primit);     // 绘制图元
-    
+		void CacheRenderData(RenderData& renderData);       // 缓存渲染对象
+		void DrawRenderObject(RenderObject& renderObject); // 绘制渲染对象
+
 		UInt AddShader(Shader& shader);            // 编译并添加Shader
 		void DelShader(UInt  shaderId);            // 卸载shader
 		void EnableShader(UInt shaderId);          // 启用shader

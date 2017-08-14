@@ -31,10 +31,11 @@ namespace Soft3D {
 	class DLLAPI Matrix4 {
 	public:
 		Matrix4();
-		Matrix4(Float data[16]);
+
 		Matrix4* Clone();	
 
-		Matrix4& CopyData(const Matrix4& mat4);
+		Matrix4& Set(Float data[16]);
+		Matrix4& Set(const Matrix4& mat4);
 
 		Matrix4& Add(const Matrix4& mat4);
 		Matrix4& Sub(const Matrix4& mat4);

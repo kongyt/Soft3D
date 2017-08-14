@@ -17,6 +17,9 @@ namespace Soft3D {
 		static void Log(const Color& color);
 		static void Log(const Matrix4& mat4);
 		static void Log(const Quaternion& quaternion);
+		static void Error(const char* errMsg);
+		static void Info(const char* infoMsg);
+		static char* ToString(const Matrix4& mat4);
 
 	};
 

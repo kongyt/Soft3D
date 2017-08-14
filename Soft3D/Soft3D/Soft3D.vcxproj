@@ -83,16 +83,18 @@
     <ClInclude Include="Debug.h" />
     <ClInclude Include="DllApi.h" />
     <ClInclude Include="Frustum.h" />
-    <ClInclude Include="GObj.h" />
+    <ClInclude Include="GameObject.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="MathUtils.h" />
     <ClInclude Include="Matrix4.h" />
     <ClInclude Include="Pixmap.h" />
     <ClInclude Include="Plane.h" />
-    <ClInclude Include="Primitivew.h" />
+    <ClInclude Include="RenderData.h" />
+    <ClInclude Include="RenderObject.h" />
     <ClInclude Include="Quaternion.h" />
     <ClInclude Include="RenderSystemInterface.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="Soft3D.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Types.h" />
     <ClInclude Include="Vector3.h" />
@@ -103,10 +105,15 @@
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="Debug.cpp" />
     <ClCompile Include="Frustum.cpp" />
+    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="MathUtils.cpp" />
     <ClCompile Include="Matrix4.cpp" />
+    <ClCompile Include="Pixmap.cpp" />
     <ClCompile Include="Plane.cpp" />
     <ClCompile Include="Quaternion.cpp" />
+    <ClCompile Include="RenderData.cpp" />
+    <ClCompile Include="RenderObject.cpp" />
+    <ClCompile Include="stb_image.c" />
     <ClCompile Include="Vector3.cpp" />
     <ClCompile Include="Viewport.cpp" />
   </ItemGroup>

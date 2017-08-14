@@ -6,30 +6,25 @@
 
 namespace Soft3D{
 
-	enum Format{
-		RGBA8888 = 1,
-		RGBA4444 = 2,
-		RGB565   = 3,
-		RGB888   = 4
-	};
 
 	class DLLAPI Pixmap{
 	public:
 		Pixmap(FILE* file);
-		Pixmap(Byte encodedData[], UInt offset, UInt len);
-		Pixmap(UInt width, UInt height, Format format);
+		Pixmap(Byte encodedData[], Int offset, Int len);
+		Pixmap(Int width, Int height, Int format);
 
-		void DrawPixmap(const Pixmap& pixmap, UInt x, UInt y);
-		void DrawPixmap(const Pixmap& pixmap, UInt x, UInt y, UInt srcX, UInt srcY, UInt srcWidth, UInt srcHeight);
-		void DrawPixmap(const Pixmap& pixmap, UInt srcX, UInt srcY, UInt srcWidth, UInt srcHeight, UInt dstX, UInt dstY, UInt dstWidth, UInt dstHeight);
+		void DrawPixmap(const Pixmap& pixmap, Int x, Int y);
+		void DrawPixmap(const Pixmap& pixmap, Int x, Int y, Int srcX, Int srcY, Int srcWidth, Int srcHeight);
+		void DrawPixmap(const Pixmap& pixmap, Int srcX, Int srcY, Int srcWidth, Int srcHeight, Int dstX, Int dstY, Int dstWidth, Int dstHeight);
 	private:
-		Bool Decode(Byte encodeData[], UInt offset, UInt len);
-		Bool AllocMemory(UInt width, UInt height, Format format);
+		Bool Decode(Byte encodeData[], Int offset, Int len);
+		Bool AllocMemory(Int width, Int height, Int format);
+		UInt GetPixelSize(Int format);
 
 	public:
-		UInt width;
-		UInt height;
-		Format format;
+		Int width;
+		Int height;
+		Int format;
 		Byte* data;
 	
 	};

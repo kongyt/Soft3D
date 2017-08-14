@@ -58,20 +58,17 @@ namespace Soft3D {
 		return Color();
 	}
 
-	void RenderSystemD3D11::SetProjectionMatrix(const Matrix4& projectionMatrix) {
+	void RenderSystemD3D11::SetCombinedMatrix(Matrix4& combined) {
 
 	}
 
-	Matrix4& RenderSystemD3D11::GetProjectionMatrix() {
-		return Matrix4();
-	}
-
-	void RenderSystemD3D11::SetModelViewMatrix(const Matrix4& viewMatrix) {
+	void RenderSystemD3D11::PushTransformMatrix(Matrix4& transformMatrix) {
 
 	}
 
-	Matrix4& RenderSystemD3D11::GetModelViewMatrix() {
-		return Matrix4();
+
+	void RenderSystemD3D11::PopTransformMatrix() {
+
 	}
 
 	void RenderSystemD3D11::EnableDepthTest() {
@@ -131,12 +128,16 @@ namespace Soft3D {
 		return BlendMode();
 	}
 
-	void RenderSystemD3D11::CachePrimitivew(Primitivew primit) {
+	void RenderSystemD3D11::CacheRenderData(RenderData& renderData) {
 
 	}
 
-	void RenderSystemD3D11::DrawPrimitivew(const Primitivew& primit) {
-
+	void RenderSystemD3D11::DrawRenderObject(RenderObject& renderObject) {
+		switch (renderObject.renderType)
+		{
+		default:
+			break;
+		}
 	}
 
 	UInt RenderSystemD3D11::AddShader(Shader& shader) {

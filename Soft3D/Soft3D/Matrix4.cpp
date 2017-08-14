@@ -4,22 +4,26 @@
 namespace Soft3D {
 
 	Matrix4::Matrix4() {
-		for (int i = 0; i < 16; i++) {
-			this->data[i] = 0.0f;
-		}
+		data[M00] = 1.0f;	data[M01] = 0.0f;	data[M02] = 0.0f;	data[M03] = 0.0f;
+		data[M10] = 0.0f;	data[M11] = 1.0f;	data[M12] = 0.0f;	data[M13] = 0.0f;
+		data[M20] = 0.0f;	data[M21] = 0.0f;	data[M22] = 1.0f;	data[M23] = 0.0f;
+		data[M30] = 0.0f;	data[M31] = 0.0f;	data[M32] = 0.0f;	data[M33] = 1.0f;
+	}	
+
+	Matrix4* Matrix4::Clone() {
+		Matrix4* newMat = new Matrix4();
+		newMat->Set(data);
+		return newMat;
 	}
 
-	Matrix4::Matrix4(Float data[16]) {
+	Matrix4& Matrix4::Set(Float data[16]) {
 		for (int i = 0; i < 16; i++) {
 			this->data[i] = data[i];
 		}
+		return *this;
 	}
 
-	Matrix4* Matrix4::Clone() {
-		return new Matrix4(data);
-	}
-
-	Matrix4& Matrix4::CopyData(const Matrix4& mat4) {
+	Matrix4& Matrix4::Set(const Matrix4& mat4) {
 		for (int i = 0; i < 16; i++) {
 			data[i] = mat4.data[i];
 		}

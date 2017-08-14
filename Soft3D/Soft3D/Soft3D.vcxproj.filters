@@ -51,9 +51,6 @@
     <ClInclude Include="BlendMode.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Primitivew.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Shader.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -69,13 +66,22 @@
     <ClInclude Include="Camera.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="GObj.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="ComponentInterface.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Plane.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderObject.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderData.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Soft3D.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -108,6 +114,21 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Plane.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderData.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderObject.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="stb_image.c">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Pixmap.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,4 +1,7 @@
 #include "RenderSystem_GL.h"
+#include "../Soft3D/Matrix4.h"
+#include "../Soft3D/Debug.h"
+
 namespace Soft3D{
 
 	Bool RenderSystemGL::InitalizeWindow(const RenderConfig& config){
@@ -129,6 +132,11 @@ namespace Soft3D{
 		glClearColor(color.r, color.g, color.b, color.a);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BITS);
 
+		Matrix4  mat4;
+		mat4.SetToTranslation(Vector3(100,0,0));
+		PushTransformMatrix(mat4);
+		
+
 		glBegin(GL_TRIANGLES);
 
 		glColor3f(1.0f, 0.0f, 0.0f);
@@ -141,7 +149,24 @@ namespace Soft3D{
 		glVertex3f(400, 240, -1000.0f);
 
 		glEnd();
-		glPopMatrix();
+
+		PushTransformMatrix(mat4);
+
+		glBegin(GL_TRIANGLES);
+
+		glColor3f(1.0f, 0.0f, 0.0f);
+		glVertex3f(0, 0.0f, -1000.0f);
+
+		glColor3f(0.0f, 1.0f, 0.0f);
+		glVertex3f(400, 0.0f, -1000.0f);
+
+		glColor3f(0.0f, 0.0f, 1.0f);
+		glVertex3f(400, 240, -1000.0f);
+
+		glEnd();
+
+		PopTransformMatrix();
+		PopTransformMatrix();
 	}
 	void RenderSystemGL::Flush(){
 		glFlush();
@@ -179,26 +204,37 @@ namespace Soft3D{
 	Color RenderSystemGL::GetBrushColor(){
 		return m_brushColor;
 	}
-    
-	void RenderSystemGL::SetProjectionMatrix(const Matrix4& projectionMatrix){
-		m_projectionMatrix.CopyData(projectionMatrix);
+
+	void RenderSystemGL::SetCombinedMatrix(Matrix4& combined) {
 		glMatrixMode(GL_PROJECTION);
-		glLoadMatrixf(projectionMatrix.data);
+		glLoadMatrixf(combined.data);
 	}
 
-	Matrix4& RenderSystemGL::GetProjectionMatrix(){
-		return m_projectionMatrix;
-	}
+	void RenderSystemGL::PushTransformMatrix(Matrix4& transformMatrix) {
+		Matrix4* tmp = m_currentTransMatrix.Clone();
+		m_transMatrixStack.push(tmp);
 
-	void RenderSystemGL::SetModelViewMatrix(const Matrix4& viewMatrix){
-		m_viewMatrix.CopyData(viewMatrix);
+		m_currentTransMatrix.Mul(transformMatrix);
+
 		glMatrixMode(GL_MODELVIEW);
-		glLoadMatrixf(viewMatrix.data);
+		glLoadMatrixf(m_currentTransMatrix.data);
 	}
 
-	Matrix4& RenderSystemGL::GetModelViewMatrix(){
-		return m_viewMatrix;
+
+	void RenderSystemGL::PopTransformMatrix() {
+		if (m_transMatrixStack.size() > 0) {
+			m_currentTransMatrix.Set(*m_transMatrixStack.top());
+			delete m_transMatrixStack.top();
+			m_transMatrixStack.pop();
+		}
+		else {
+			m_currentTransMatrix.Identity();
+		}
+
+		glMatrixMode(GL_MODELVIEW);
+		glLoadMatrixf(m_currentTransMatrix.data);
 	}
+
 
 	void RenderSystemGL::EnableDepthTest(){
 		m_usedDepthTest = true;
@@ -300,7 +336,8 @@ namespace Soft3D{
 			rs = GL_SRC_ALPHA_SATURATE;
 			break;
 		default:
-			exit(-1000);
+			Debug::Error("未知混合模式");
+			exit(-1);
 			break;
 		}
 		return rs;
@@ -316,12 +353,73 @@ namespace Soft3D{
 		return m_blendMode;
 	}
 
-	void RenderSystemGL::CachePrimitivew(Primitivew primit){
+	void RenderSystemGL::CacheRenderData(RenderData& renderData) {
 	
 	}
 
-	void RenderSystemGL::DrawPrimitivew(const Primitivew& primit){
-	
+	void RenderSystemGL::DrawRenderObject(RenderObject& renderObject) {
+		float* data = renderObject.renderData->verticesData;
+		UInt vertexSize = renderObject.renderData->vertexSize;
+		switch (renderObject.renderType)
+		{
+		case RenderType::Points:			
+			glBegin(GL_POINTS);
+			for (int i = 0; i < renderObject.renderData->vertices; i++) {
+				glVertex3f(data[i*vertexSize], data[i*vertexSize + 1], data[i*vertexSize + 2]);
+			}
+			glEnd();
+			break;
+		case RenderType::Lines:
+			glBegin(GL_LINES);
+			for (int i = 0; i < renderObject.renderData->vertices; i++) {
+				glColor4f(data[i*vertexSize+3], data[i*vertexSize + 4], data[i*vertexSize + 5], data[i*vertexSize + 6]);
+				glVertex3f(data[i*vertexSize], data[i*vertexSize + 1], data[i*vertexSize + 2]);
+			}
+			glEnd();
+			break;
+		case RenderType::LineStrip:
+			glBegin(GL_LINE_STRIP);
+			for (int i = 0; i < renderObject.renderData->vertices; i++) {
+				glColor4f(data[i*vertexSize + 3], data[i*vertexSize + 4], data[i*vertexSize + 5], data[i*vertexSize + 6]);
+				glVertex3f(data[i*vertexSize], data[i*vertexSize + 1], data[i*vertexSize + 2]);
+			}
+			glEnd();
+			break;
+		case RenderType::LineLoop:
+			glBegin(GL_LINE_LOOP);
+			for (int i = 0; i < renderObject.renderData->vertices; i++) {
+				glColor4f(data[i*vertexSize + 3], data[i*vertexSize + 4], data[i*vertexSize + 5], data[i*vertexSize + 6]);
+				glVertex3f(data[i*vertexSize], data[i*vertexSize + 1], data[i*vertexSize + 2]);
+			}
+			glEnd();
+			break;
+		case RenderType::Triangles:
+			glBegin(GL_TRIANGLES);
+			for (int i = 0; i < renderObject.renderData->vertices; i++) {
+				glColor4f(data[i*vertexSize + 3], data[i*vertexSize + 4], data[i*vertexSize + 5], data[i*vertexSize + 6]);
+				glVertex3f(data[i*vertexSize], data[i*vertexSize + 1], data[i*vertexSize + 2]);
+			}
+			glEnd();
+			break;
+		case RenderType::TriangleStrip:
+			glBegin(GL_TRIANGLE_STRIP);
+			for (int i = 0; i < renderObject.renderData->vertices; i++) {
+				glColor4f(data[i*vertexSize + 3], data[i*vertexSize + 4], data[i*vertexSize + 5], data[i*vertexSize + 6]);
+				glVertex3f(data[i*vertexSize], data[i*vertexSize + 1], data[i*vertexSize + 2]);
+			}
+			glEnd();
+			break;
+		case RenderType::TriangleFan:
+			glBegin(GL_TRIANGLE_FAN);
+			for (int i = 0; i < renderObject.renderData->vertices; i++) {
+				glColor4f(data[i*vertexSize + 3], data[i*vertexSize + 4], data[i*vertexSize + 5], data[i*vertexSize + 6]);
+				glVertex3f(data[i*vertexSize], data[i*vertexSize + 1], data[i*vertexSize + 2]);
+			}
+			glEnd();
+			break;
+		default:
+			break;
+		}
 	}
     
 	UInt RenderSystemGL::AddShader(Shader& shader){

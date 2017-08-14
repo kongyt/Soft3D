@@ -12,7 +12,7 @@
 #include "Texture.h"
 #include "Light.h"
 #include "BlendMode.h"
-#include "Primitivew.h"
+#include "RenderObject.h"
 #include "Shader.h"
 
 namespace Soft3D{
@@ -52,12 +52,10 @@ public:
 
     virtual void SetBrushColor(const Color& color) = 0; // 设置画笔颜色
     virtual Color GetBrushColor() = 0;                  // 返回画笔颜色
-    
-    virtual void SetProjectionMatrix(const Matrix4& projectionMatrix) = 0;    // 设置投影矩阵
-    virtual Matrix4& GetProjectionMatrix() = 0;                               // 返回投影矩阵
 
-    virtual void SetModelViewMatrix(const Matrix4& viewMatrix) = 0;      // 设置变换矩阵
-    virtual Matrix4& GetModelViewMatrix() = 0;                                // 返回变换矩阵
+	virtual void SetCombinedMatrix(Matrix4& combined) = 0;          // 设置组合矩阵为投影矩阵
+	virtual void PushTransformMatrix(Matrix4& transformMatrix) = 0; // 压入变换矩阵
+	virtual void PopTransformMatrix() = 0;                          // 弹出变换矩阵
 
     virtual void EnableDepthTest() = 0;                        // 启用深度测试
     virtual void DisableDepthTest() = 0;                       // 关闭深度测试
@@ -80,8 +78,8 @@ public:
     virtual void SetBlendMode(const BlendMode& blendMode) = 0;    // 设置混合模式
     virtual BlendMode GetBlendMode() = 0;                         // 返回混合模式
 
-    virtual void CachePrimitivew(Primitivew primit) = 0;       // 缓存图元，利用顶点缓冲区
-    virtual void DrawPrimitivew(const Primitivew& primit) = 0; // 绘制图元
+    virtual void CacheRenderData(RenderData& renderData) = 0;       // 缓存渲染对象
+    virtual void DrawRenderObject(RenderObject& renderObject) = 0; // 绘制渲染对象
     
     virtual UInt AddShader(Shader& shader) = 0;        // 编译并添加Shader
     virtual void DelShader(UInt  shaderId) = 0;        // 卸载shader

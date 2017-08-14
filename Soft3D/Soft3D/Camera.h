@@ -4,12 +4,12 @@
 #include "DllApi.h"
 #include "RenderSystemInterface.h"
 #include "Vector3.h"
-#include "GObj.h"
+#include "GameObject.h"
 #include "Frustum.h"
 
 namespace Soft3D {
 
-	class DLLAPI Camera : public GObj{
+	class DLLAPI Camera : public GameObject{
 	public:
 		void Update(Bool updateFrustum);
 		void Apply(RenderSystemInterface* renderSystem);
