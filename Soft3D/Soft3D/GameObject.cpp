@@ -1,13 +1,15 @@
 #include "GameObject.h"
-#include "RenderSystemInterface.h"
 #include "Matrix4.h"
-#include "RenderObject.h"
+#include "RenderContext.h"
 
 namespace Soft3D {
 
 	void GameObject::AddChild(GameObject* child) {
-		this->children.push_back(child);
-		child->parent = this;
+		if (child != NULL) {
+			this->children.push_back(child);
+			child->parent = this;
+			this->hasChildren = true;
+		}
 	}
 
 
@@ -17,6 +19,10 @@ namespace Soft3D {
 				children.erase(iter);
 				break;
 			}
+		}
+
+		if (GetChildrenNum() == 0) {
+			this->hasChildren = false;
 		}
 	}
 
@@ -31,20 +37,22 @@ namespace Soft3D {
 		}
 	}
 
-	void GameObject::Render(RenderSystemInterface* renderSystemInterface) {
-		renderSystemInterface->PushTransformMatrix(transformMatrix);
+	void GameObject::Render(RenderContext& renderContext) {	
 
 		// 渲染所有挂载的可渲染组件
 		for (auto iter = renderObjects.begin(); iter != renderObjects.end(); ++iter) {
-			(*iter)->Render(renderSystemInterface);
+			(*iter)->Render(renderContext);
 		}
 
 		// 渲染所有子物体
-		for (auto iter = children.begin(); iter != children.end(); ++iter) {
-			(*iter)->Render(renderSystemInterface);
+		if (hasChildren) {
+			renderContext.PushTransformMatrix(transformMatrix);	// 本地变换矩阵压栈		
+			for (auto iter = children.begin(); iter != children.end(); ++iter) {
+				(*iter)->Render(renderContext);
+			}
+			renderContext.PopTransformMatrix();		
 		}
-
-		renderSystemInterface->PopTransformMatrix();
+		
 	}
 
 	void GameObject::AddRenderObject(RenderObject* renderObject) {

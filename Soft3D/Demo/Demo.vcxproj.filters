@@ -20,7 +20,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Demo.h">
+    <ClInclude Include="DemoGame.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TestScene.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

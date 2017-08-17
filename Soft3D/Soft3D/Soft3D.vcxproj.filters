@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="RenderSystemInterface.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Types.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -37,9 +34,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Vector3.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Viewport.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Texture.h">
@@ -72,16 +66,34 @@
     <ClInclude Include="Plane.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="RenderObject.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="RenderData.h">
+    <ClInclude Include="Soft3D.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Soft3D.h">
+    <ClInclude Include="Window.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GLES_Support.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderContext.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderObject.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -104,9 +116,6 @@
     <ClCompile Include="Vector3.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Viewport.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Frustum.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -116,19 +125,28 @@
     <ClCompile Include="Plane.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="RenderData.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="GameObject.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderObject.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="stb_image.c">
       <Filter>头文件</Filter>
     </ClCompile>
     <ClCompile Include="Pixmap.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderContext.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

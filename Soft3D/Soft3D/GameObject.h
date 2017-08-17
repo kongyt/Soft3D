@@ -8,6 +8,8 @@
 #include "Vector3.h"
 #include "ComponentInterface.h"
 #include "Matrix4.h"
+#include "RenderContext.h"
+#include "RenderObject.h"
 
 namespace Soft3D {
 
@@ -21,7 +23,7 @@ namespace Soft3D {
 		UInt GetChildrenNum();
 
 		void Update(Float delta);
-		void Render(RenderSystemInterface* renderSystemInterface);
+		void Render(RenderContext& renderContext);
 
 		void AddRenderObject(RenderObject* renderObject);
 		void DelRenderObject(RenderObject* renderObject);
@@ -38,8 +40,8 @@ namespace Soft3D {
 		Matrix4 transformMatrix;		// 相对父节点的本地变换矩阵
 
 	private:
-		
 		GameObject* parent;
+		Bool hasChildren;
 		std::vector<GameObject*> children;
 		std::vector<RenderObject*> renderObjects;
 		std::vector<ComponentInterface*> components;

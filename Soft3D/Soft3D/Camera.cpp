@@ -22,10 +22,6 @@ namespace Soft3D {
 		}
 	}
 
-	void Camera::Apply(RenderSystemInterface* renderSystem) {
-		renderSystem->SetCombinedMatrix(m_combined);
-	}
-
 	void Camera::SetToOrth(Float viewportWidth, Float viewportHeight) {
 		SetToOrth(false, viewportWidth, viewportHeight);
 	}

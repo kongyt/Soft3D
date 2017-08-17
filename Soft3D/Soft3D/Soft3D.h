@@ -2,6 +2,7 @@
 #define _Soft3D_H__
 
 #include "Types.h"
+#include "Window.h"
 #include "BlendMode.h"
 #include "Camera.h"
 #include "Color.h"
@@ -14,13 +15,14 @@
 #include "Matrix4.h"
 #include "Pixmap.h"
 #include "Plane.h"
-#include "RenderData.h"
-#include "RenderObject.h"
 #include "Quaternion.h"
-#include "RenderSystemInterface.h"
 #include "Shader.h"
 #include "Texture.h"
 #include "Vector3.h"
-#include "Viewport.h"
+#include "Texture.h"
+#include "GLES_Support.h"
+#include "Game.h"
+#include "Scene.h"
+
 
 #endif

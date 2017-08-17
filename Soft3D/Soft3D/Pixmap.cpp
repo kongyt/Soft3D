@@ -9,11 +9,14 @@
 
 namespace Soft3D {
 	
+
 	Pixmap::Pixmap(FILE* file) {
 		long n = 0;
 		fseek(file, 0, 2);
 		n = ftell(file);
+		fseek(file, 0, 0);
 		Byte* encodedData = new Byte[n];
+		fread(encodedData, sizeof(Byte), n, file);
 		Decode(encodedData, 0, n);
 		delete encodedData;
 	}

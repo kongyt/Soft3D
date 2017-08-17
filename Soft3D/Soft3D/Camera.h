@@ -2,7 +2,6 @@
 #define _Camera_H__
 
 #include "DllApi.h"
-#include "RenderSystemInterface.h"
 #include "Vector3.h"
 #include "GameObject.h"
 #include "Frustum.h"
@@ -12,7 +11,6 @@ namespace Soft3D {
 	class DLLAPI Camera : public GameObject{
 	public:
 		void Update(Bool updateFrustum);
-		void Apply(RenderSystemInterface* renderSystem);
 		void SetToOrth(Float viewportWidth, Float viewportHeight);
 		void SetToOrth(Bool yDown, Float viewportWidth, Float viewportHeight);
 		void SetToPers(Float fieldOfView, Float viewportWidth, Float viewportHeight);

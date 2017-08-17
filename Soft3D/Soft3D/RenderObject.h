@@ -2,33 +2,21 @@
 #define _Render_Object_H__
 
 #include "DllApi.h"
-#include "RenderData.h"
+#include "Types.h"
+#include "RenderContext.h"
 
 namespace Soft3D {
 
 	class GameObject;
-	class RenderSystemInterface;
-
-	enum DLLAPI RenderType {
-		Points,
-		Lines,
-		LineStrip,
-		LineLoop,
-		Triangles,
-		TriangleStrip,
-		TriangleFan,
-	};
 
 	class DLLAPI RenderObject {
 	public:
-		void SetVisiable(Bool visiable);
-		void Render(RenderSystemInterface* renderSystem);
+		void SetVisiable(Bool visiable) { this->visiable = visiable; };
+		virtual void Render(RenderContext& renderContext) = 0;
 
 	public:
 		GameObject* owner;
 		Bool visiable;
-		RenderType renderType;
-		RenderData* renderData;
 	};
 }
 
