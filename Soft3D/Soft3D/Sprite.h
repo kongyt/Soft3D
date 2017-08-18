@@ -18,6 +18,7 @@ namespace Soft3D {
 	public:
 		Texture* texture;
 		Float vertices[SPRITE_SIZE];
+		Byte  indices[6] = {0, 1, 3, 1, 2, 3};
 		Color color;
 		Float width;
 		Float height;

@@ -3,6 +3,7 @@
 
 #include "DllApi.h"
 #include "Types.h"
+#include "Shader.h"
 
 namespace Soft3D {
 
@@ -11,16 +12,13 @@ namespace Soft3D {
 		int offset;
 		int numComponents;
 		String alias;
-
 	};
 
 	class DLLAPI Mesh {
-		Mesh(int vertices, int indices, int vertexSize,) {
-			
-		}
+	public:
+		Mesh(int vertices, int vertexSize, int indices);
 
 	};
-
 }
 
 

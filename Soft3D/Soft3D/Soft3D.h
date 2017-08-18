@@ -23,6 +23,7 @@
 #include "GLES_Support.h"
 #include "Game.h"
 #include "Scene.h"
+#include "Sprite.h"
 
 
 #endif

@@ -1,5 +1,5 @@
 #include "RenderContext.h"
-
+#include "Shader.h"
 
 namespace Soft3D {
 
@@ -113,4 +113,51 @@ namespace Soft3D {
 		return m_combinedMatrix;
 	}
 
+	Shader* RenderContext::GetDefaultShader() {
+		if (m_defaultShader == NULL) {
+			const char* vertexShader =
+				"attribute vec4 " POSITION_ATTRIBUTE ";\n"
+				"attribute vec4 " COLOR_ATTRIBUTE ";\n"
+				"attribute vec2 " TEXCOORD_ATTRIBUTE ";\n"
+				"uniform mat4 u_projTrans;\n"
+				"varying vec4 v_color;\n"
+				"varying vec2 v_texCoords;\n"
+				"\n"
+				"void main()\n"
+				"{\n"
+				"    v_color = " COLOR_ATTRIBUTE ";\n"
+				"    v_texCoords = " TEXCOORD_ATTRIBUTE ";\n"
+				//"    gl_Position = u_projTrans * " POSITION_ATTRIBUTE ";\n"
+				"}\n";
+
+			const char* fragmentShader =
+				"#ifdef GL_ES\n"
+				"#define LOWP lowp\n"
+				"precision mediump float;\n"
+				"#else\n"
+				"#endif\n"
+				"varying LOWP vec4 v_color;\n"
+				"varying vec2 v_texCoords;\n"
+				"uniform sampler2D u_texture;\n"
+				"void main()\n"
+				"{\n"
+				"    gl_FragColor = v_color * texture2D(u_texture, v_texCoords);\n"
+				"}";
+
+
+			m_defaultShader = new Shader(vertexShader, fragmentShader);			
+		}
+		if (m_defaultShader->IsCompiled() == false) {
+			return NULL;
+		}
+		else {
+			return m_defaultShader;
+		}
+	}
+
+	void RenderContext::SwitchTexture(Texture& texture) {
+		if (m_lastTextureId != texture.glHandle) {
+			texture.Bind();
+		}
+	}
 }
