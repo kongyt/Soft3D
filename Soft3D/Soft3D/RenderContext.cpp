@@ -1,78 +1,94 @@
 #include "RenderContext.h"
 #include "Shader.h"
+#include <assert.h>
 
 namespace Soft3D {
+	
+	void BuildAttribList(EGLint *attribList)
+	{
+		int    nAttribCount = 0;
+
+		attribList[nAttribCount++] = EGL_RED_SIZE;
+		attribList[nAttribCount++] = 5;
+		attribList[nAttribCount++] = EGL_GREEN_SIZE;
+		attribList[nAttribCount++] = 6;
+		attribList[nAttribCount++] = EGL_BLUE_SIZE;
+		attribList[nAttribCount++] = 5;
+		attribList[nAttribCount++] = EGL_ALPHA_SIZE;
+		attribList[nAttribCount++] = 0;
+		attribList[nAttribCount++] = EGL_DEPTH_SIZE;
+		attribList[nAttribCount++] = 16;
+		attribList[nAttribCount++] = EGL_STENCIL_SIZE;
+		attribList[nAttribCount++] = 0;
+		attribList[nAttribCount++] = EGL_SAMPLES;
+		attribList[nAttribCount++] = 4;
+		attribList[nAttribCount++] = EGL_NONE;
+
+		assert(nAttribCount < MAX_EGL_ATTRIBUTES);
+	}
 
 	Bool RenderContext::Init(HWND hwnd) {
-		//创建出egl 显示器来
+		EGLint attribList[MAX_EGL_ATTRIBUTES];
+		EGLint numConfigs;
+		EGLint majorVersion;
+		EGLint minorVersion;
+
+		/// Build up the attribute list
+		BuildAttribList(attribList);
+
+		// Get Display
 		m_eglDisplay = eglGetDisplay(EGL_DEFAULT_DISPLAY);
 		if (m_eglDisplay == EGL_NO_DISPLAY)
 		{
-			return false;
+			assert(0 && "eglGetDisplay failed");
+			return FALSE;
 		}
 
-		//初始化正确的egl版本
-		EGLint majorVersion;
-		EGLint minorVersion;
+		// Initialize EGL
 		if (!eglInitialize(m_eglDisplay, &majorVersion, &minorVersion))
 		{
-			return false;
+			assert(0 && "eglInitialize failed");
+			return FALSE;
 		}
 
-		// 获取支持的egl配置
-		EGLint nConfigs;
-		if (!eglGetConfigs(m_eglDisplay, NULL, 0, &nConfigs))
+		// Get configs
+		if (!eglGetConfigs(m_eglDisplay, NULL, 0, &numConfigs))
 		{
-			return false;
+			assert(0 && "eglGetConfigs failed");
+			return FALSE;
 		}
 
-
-		// 我们能用到这些配置 并且用上
-		EGLint attrs[MAX_EGL_ATTRIBUTES] = { 0 };
-		int attrIdx = 0;
-		attrs[attrIdx++] = EGL_RED_SIZE;
-		attrs[attrIdx++] = 5;
-		attrs[attrIdx++] = EGL_GREEN_SIZE;
-		attrs[attrIdx++] = 6;
-		attrs[attrIdx++] = EGL_BLUE_SIZE;
-		attrs[attrIdx++] = 5;
-		attrs[attrIdx++] = EGL_ALPHA_SIZE;
-		attrs[attrIdx++] = 0;
-		attrs[attrIdx++] = EGL_DEPTH_SIZE;
-		attrs[attrIdx++] = 16;
-		attrs[attrIdx++] = EGL_STENCIL_SIZE;
-		attrs[attrIdx++] = 0;
-		attrs[attrIdx++] = EGL_SAMPLES;
-		attrs[attrIdx++] = 4;
-		attrs[attrIdx++] = EGL_NONE;
-		if (!eglChooseConfig(m_eglDisplay, attrs, &m_eglConfig, 1, &nConfigs))
+		// Choose config
+		if (!eglChooseConfig(m_eglDisplay, attribList, &m_eglConfig, 1, &numConfigs))
 		{
-			return false;
+			assert(0 && "eglChooseConfig failed");
+			return FALSE;
 		}
 
-		//创建窗口表皮 表面 
-		m_eglSurface = eglCreateWindowSurface(
-			m_eglDisplay, m_eglConfig, NativeWindowType(hwnd), NULL);
+		// Create a surface
+		m_eglSurface = eglCreateWindowSurface(m_eglDisplay, m_eglConfig, NativeWindowType(hwnd), NULL);
 		if (m_eglSurface == EGL_NO_SURFACE)
 		{
-			return false;
+			assert(0 && "eglCreateWindowSurface failed");
+			return FALSE;
 		}
 
-		//创建egl上下文
-		EGLint ctxAttr[] = { EGL_CONTEXT_CLIENT_VERSION, 2, EGL_NONE };
-		m_eglContext = eglCreateContext(m_eglDisplay, m_eglConfig, EGL_NO_CONTEXT, ctxAttr);
+		// Create a GL context
+		EGLint ctxAttribList[] = { EGL_CONTEXT_CLIENT_VERSION, 2, EGL_NONE };
+		m_eglContext = eglCreateContext(m_eglDisplay, m_eglConfig, EGL_NO_CONTEXT, ctxAttribList);
 		if (m_eglContext == EGL_NO_CONTEXT)
 		{
-			return false;
+			assert(0 && "eglCreateContext failed");
+			return FALSE;
 		}
 
-		//好了 egl准备好了 以后画的东西都是egl控制啦
+		// Make the context current
 		if (!eglMakeCurrent(m_eglDisplay, m_eglSurface, m_eglSurface, m_eglContext))
 		{
-			return false;
+			assert(0 && "eglMakeCurrent failed");
+			return FALSE;
 		}
-
-		return true;
+		return TRUE;
 	}
 	
 	void RenderContext::Destroy() {
@@ -85,6 +101,7 @@ namespace Soft3D {
 
 	void RenderContext::SetCameraMatrix(Matrix4& cameraMatrix) {
 		m_projectionMatrix.Set(cameraMatrix);
+		m_combinedMatrix.Set(m_projectionMatrix).Mul(m_transformMatrix);
 	}
 
 
@@ -127,7 +144,7 @@ namespace Soft3D {
 				"{\n"
 				"    v_color = " COLOR_ATTRIBUTE ";\n"
 				"    v_texCoords = " TEXCOORD_ATTRIBUTE ";\n"
-				//"    gl_Position = u_projTrans * " POSITION_ATTRIBUTE ";\n"
+				"    gl_Position = u_projTrans * " POSITION_ATTRIBUTE ";\n"
 				"}\n";
 
 			const char* fragmentShader =
@@ -155,9 +172,21 @@ namespace Soft3D {
 		}
 	}
 
+	void RenderContext::Begin() {
+		glBindTexture(GL_TEXTURE_2D, 0);
+		m_lastTextureId = 0;
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	}
+
+	void RenderContext::End() {		
+		SwapBuffer();
+	}
+
 	void RenderContext::SwitchTexture(Texture& texture) {
 		if (m_lastTextureId != texture.glHandle) {
 			texture.Bind();
-		}
+		}		
 	}
+
 }

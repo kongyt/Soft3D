@@ -13,7 +13,6 @@
 
 namespace Soft3D {
 
-	class RenderSystemInterface;
 	class RenderObject;
 
 	class DLLAPI GameObject{
@@ -22,8 +21,8 @@ namespace Soft3D {
 		void DelChild(GameObject* child);
 		UInt GetChildrenNum();
 
-		void Update(Float delta);
-		void Render(RenderContext& renderContext);
+		virtual void Update(Float delta);
+		virtual void Render(RenderContext& renderContext);
 
 		void AddRenderObject(RenderObject* renderObject);
 		void DelRenderObject(RenderObject* renderObject);
@@ -33,15 +32,22 @@ namespace Soft3D {
 		void DelComponent(ComponentInterface* component);
 		UInt GetComponentNum();
 
-	public:
-		Vector3 position;
-		Vector3 rotation;
-		Vector3 scale;
+		virtual void SetPosition(Float x, Float y, Float z);
+		virtual void SetRotation(Float rx, Float ry, Float rz);
+		virtual void SetScale(Float sx, Float sy, Float sz);
+		Vector3& GetPosition();
+		Vector3& GetRotation();
+		Vector3& GetScale();
+
+	protected:
+		Vector3 position = Vector3(0,0,0);
+		Vector3 rotation = Vector3(0,0,0);
+		Vector3 scale = Vector3(1,1,1);
+		Bool isTransformed = false;
 		Matrix4 transformMatrix;		// 相对父节点的本地变换矩阵
 
-	private:
+	protected:
 		GameObject* parent;
-		Bool hasChildren;
 		std::vector<GameObject*> children;
 		std::vector<RenderObject*> renderObjects;
 		std::vector<ComponentInterface*> components;

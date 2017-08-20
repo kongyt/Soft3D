@@ -25,6 +25,7 @@ namespace Soft3D {
 		Quaternion Conjugate();
 		Quaternion Inverse();
 		Vector3 EulerAngle();
+		void ToMatrix4(Matrix4& mat4);
 
 	public:
 		Float x;

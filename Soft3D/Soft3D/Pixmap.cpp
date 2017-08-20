@@ -45,13 +45,36 @@ namespace Soft3D {
 	
 	}
 
+	PixmapFormat StbiToPixmapFormat(int format) {
+		PixmapFormat rs = None;
+		switch (format)
+		{
+		case STBI_rgb:
+			rs = PixmapFormat::RGB;
+			break;
+		case STBI_rgb_alpha:
+			rs = PixmapFormat::RGBA;
+			break;
+		default:
+			break;
+		}
+		return rs;
+	}
+
 	Bool Pixmap::Decode(Byte encodeData[], Int offset, Int len) {
 		UChar* pixels = stbi_load_from_memory(encodeData, len, &width, &height, &format, 0);
 		if (pixels == NULL) {
 			return false;
 		}
+		
 		data = pixels;
-		return true;
+
+		format = StbiToPixmapFormat(format);
+		if (format != PixmapFormat::None) {
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 	Bool Pixmap::AllocMemory(Int width, Int height, Int format) {
@@ -62,5 +85,7 @@ namespace Soft3D {
 	UInt Pixmap::GetPixelSize(Int format) {
 		return 4;
 	}
+
+	
 
 }

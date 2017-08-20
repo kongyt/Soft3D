@@ -3,6 +3,9 @@
 
 #include "DllApi.h"
 #include "Types.h"
+#include "Matrix4.h"
+#include <map>
+using namespace std;
 
 #define POSITION_ATTRIBUTE  "a_position"
 #define NORMAL_ATTRIBUTE  "a_normal"
@@ -21,6 +24,10 @@ namespace Soft3D {
 		void Begin();
 		void End();
 
+		void SetUniformMatrix(const char* matName, Matrix4& mat4);
+		void SetUniformi(const char* name, int value);
+
+		int GetAttrLocation(const char* name);
 
 	private:
 		void CompileShader(const char* vertexShader, const char* fragmentShader);
@@ -32,6 +39,8 @@ namespace Soft3D {
 		int m_vertexShaderId;
 		int m_fragmentShaderId;
 		Bool m_isCompiled;
+		map<String, Int> m_uniforms;
+		map<String, Int> m_attrs;
 	};
 
 }

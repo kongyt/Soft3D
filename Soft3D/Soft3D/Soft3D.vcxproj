@@ -41,6 +41,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -78,6 +79,7 @@
   <ItemGroup>
     <ClInclude Include="BlendMode.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="ClickListener.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="ComponentInterface.h" />
     <ClInclude Include="Debug.h" />
@@ -86,6 +88,10 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GLES_Support.h" />
+    <ClInclude Include="UIGroup.h" />
+    <ClInclude Include="Input.h" />
+    <ClInclude Include="InputAdapter.h" />
+    <ClInclude Include="InputProcessor.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="MathUtils.h" />
     <ClInclude Include="Matrix4.h" />
@@ -101,7 +107,10 @@
     <ClInclude Include="Soft3D.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="TextureRegion.h" />
     <ClInclude Include="Types.h" />
+    <ClInclude Include="UIActor.h" />
+    <ClInclude Include="UILayer.h" />
     <ClInclude Include="Vector3.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
@@ -112,6 +121,8 @@
     <ClCompile Include="Frustum.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Input.cpp" />
+    <ClCompile Include="InputAdapter.cpp" />
     <ClCompile Include="MathUtils.cpp" />
     <ClCompile Include="Matrix4.cpp" />
     <ClCompile Include="Pixmap.cpp" />
@@ -122,6 +133,9 @@
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="stb_image.c" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="TextureRegion.cpp" />
+    <ClCompile Include="UIActor.cpp" />
+    <ClCompile Include="UIGroup.cpp" />
     <ClCompile Include="Vector3.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>

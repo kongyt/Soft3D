@@ -18,12 +18,16 @@
 #include "Quaternion.h"
 #include "Shader.h"
 #include "Texture.h"
+#include "TextureRegion.h"
 #include "Vector3.h"
 #include "Texture.h"
 #include "GLES_Support.h"
 #include "Game.h"
 #include "Scene.h"
 #include "Sprite.h"
+#include "Input.h"
+#include "InputProcessor.h"
+#include "InputAdapter.h"
 
 
 #endif

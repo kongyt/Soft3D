@@ -9,26 +9,58 @@ namespace Soft3D {
 		this->isLoaded = false;
 		this->pixmap = pixmap;
 		this->textureId = 0;
+		this->width = pixmap->width;
+		this->height = pixmap->height;
 	}
 
-	void Texture::Init() {
+	int ToGLPixelFormat(int pixmapFormat) {
+		int rs = 0;
+		switch (pixmapFormat)
+		{
+		case PixmapFormat::RGB:
+			rs = GL_RGB;
+			break;
+		case PixmapFormat::RGBA:
+			rs = GL_RGBA;
+			break;
+		default:
+			break;
+		}
+		return rs;
+	}
+
+	void Texture::Load() {
 		glTarget = GL_TEXTURE_2D;
 		glGenTextures(1, &glHandle);
-		Bind();
+		glBindTexture(glTarget, glHandle);
 		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);//此为纹理过滤参数设置
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexImage2D(glTarget, 0, GL_RGBA, pixmap->width, pixmap->height, 0, GL_RGBA8_OES, GL_UNSIGNED_BYTE, pixmap->data);
+		glTexImage2D(glTarget, 0, ToGLPixelFormat(pixmap->format), pixmap->width, pixmap->height, 0, ToGLPixelFormat(pixmap->format), GL_UNSIGNED_BYTE, pixmap->data);
 		glBindTexture(glTarget, 0);
+		isLoaded = true;
+	}
+
+	void Texture::Unload() {
+		glDeleteTextures(1, &glHandle);
 	}
 
 
 	void Texture::Bind() {
-		glBindTexture(glTarget, glHandle);
+		if (isLoaded == true) {
+			glBindTexture(glTarget, glHandle);
+		}
+		
+	}
+
+	void Texture::Unbind() {
+		glBindTexture(glTarget, 0);
 	}
 
 	void Texture::Destroy(){
-
+		if (isLoaded == true) {
+			Unload();
+		}	
 	}
 
 }

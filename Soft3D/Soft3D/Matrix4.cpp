@@ -1,5 +1,6 @@
 #include "Matrix4.h"
 #include "MathUtils.h"
+#include "Quaternion.h"
 
 namespace Soft3D {
 
@@ -216,6 +217,18 @@ namespace Soft3D {
 		data[M33] = data[M30] * trans.x + data[M31] * trans.y + data[M32] * trans.z + data[M33];
 
 		return *this;
+	}
+
+	Matrix4& Matrix4::Rotate(const Vector3& trans) {
+
+		Quaternion quat;
+		quat.SetEulerAngle(trans.x, trans.y, trans.z);
+
+		Matrix4 tmp;
+		quat.ToMatrix4(tmp);	
+
+		return Mul(tmp);
+	
 	}
 
 	Matrix4& Matrix4::RotateX(Float rotation) {

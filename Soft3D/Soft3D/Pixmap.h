@@ -4,8 +4,14 @@
 #include "DllApi.h"
 #include "Types.h"
 
+
 namespace Soft3D{
 
+	enum PixmapFormat {
+		None = 0,
+		RGB = 1,
+		RGBA = 2
+	};
 
 	class DLLAPI Pixmap{
 	public:
@@ -22,9 +28,9 @@ namespace Soft3D{
 		UInt GetPixelSize(Int format);
 
 	public:
-		Int width;
-		Int height;
-		Int format;
+		Int width = 0;
+		Int height = 0;
+		Int format = PixmapFormat::None;
 		Byte* data;
 	
 	};

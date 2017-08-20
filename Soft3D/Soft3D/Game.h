@@ -5,7 +5,7 @@
 #include "Types.h"
 #include "Scene.h"
 #include "RenderContext.h"
-
+#include "InputProcessor.h"
 
 namespace Soft3D {
 
@@ -19,8 +19,8 @@ namespace Soft3D {
 		virtual void Render(RenderContext& context, Float delta);
 		virtual void Destroy();
 
-	private:
-		Scene* m_scene;
+	protected:
+		Scene* m_scene;		
 		int m_width;
 		int m_height;
 	};

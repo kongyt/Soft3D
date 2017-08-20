@@ -126,4 +126,34 @@ namespace Soft3D {
 		return Vector3(MathUtils::Rad2Deg(yaw), MathUtils::Rad2Deg(pitch), MathUtils::Rad2Deg(roll));
 	}
 
+
+	void Quaternion::ToMatrix4(Matrix4& mat4) {
+		float xx = x * x;
+		float xy = x * y;
+		float xz = x * z;
+		float xw = x * w;
+		float yy = y * y;
+		float yz = y * z;
+		float yw = y * w;
+		float zz = z * z;
+		float zw = z * w;
+
+		// Set matrix from quaternion
+		mat4.data[M00] = 1 - 2 * (yy + zz);
+		mat4.data[M01] = 2 * (xy - zw);
+		mat4.data[M02] = 2 * (xz + yw);
+		mat4.data[M03] = 0;
+		mat4.data[M10] = 2 * (xy + zw);
+		mat4.data[M11] = 1 - 2 * (xx + zz);
+		mat4.data[M12] = 2 * (yz - xw);
+		mat4.data[M13] = 0;
+		mat4.data[M20] = 2 * (xz - yw);
+		mat4.data[M21] = 2 * (yz + xw);
+		mat4.data[M22] = 1 - 2 * (xx + yy);
+		mat4.data[M23] = 0;
+		mat4.data[M30] = 0;
+		mat4.data[M31] = 0;
+		mat4.data[M32] = 0;
+		mat4.data[M33] = 1;
+	}
 }

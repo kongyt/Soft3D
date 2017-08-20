@@ -31,16 +31,13 @@ namespace Soft3D {
 
 		Float m_zoom = 1.0f;
 		Float m_near = 0.0f;
-		Float m_far = 1000.0f;
+		Float m_far = 10000.0f;
 		Float m_viewportWidth;
 		Float m_viewportHeight;
 
 		Float m_fieldOfView;
 		
 		Frustum m_frustum;
-
-		RenderSystemInterface* m_renderSystem;
-
 	};
 
 

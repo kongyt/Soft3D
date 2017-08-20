@@ -18,6 +18,8 @@ namespace Soft3D {
 	class DLLAPI RenderContext {
 	public:
 		Bool Init(HWND hwnd);
+		void Begin();
+		void End();
 		void Destroy();
 		void SwapBuffer();
 		void SetCameraMatrix(Matrix4& cameraMatrix);

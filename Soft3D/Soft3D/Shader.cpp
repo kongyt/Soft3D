@@ -16,6 +16,48 @@ namespace Soft3D {
 		glUseProgram(0);
 	}
 
+	void Shader::SetUniformMatrix(const char* matName, Matrix4& mat4) {
+		auto itor = m_uniforms.find(matName);
+		int location;
+		if (itor == m_uniforms.end()) {
+			location = glGetUniformLocation(m_program, matName);
+			m_uniforms.insert(pair<String, Int>(matName, location));
+		}
+		else {
+			location = itor->second;
+		}
+
+		glUniformMatrix4fv(location, 1, false, mat4.data);
+		
+	}
+
+	void Shader::SetUniformi(const char* name, int value){
+		auto itor = m_uniforms.find(name);
+		int location;
+		if (itor == m_uniforms.end()) {
+			location = glGetUniformLocation(m_program, name);
+			m_uniforms.insert(pair<String, Int>(name, location));
+		}
+		else {
+			location = itor->second;
+		}
+		glUniform1i(location, value);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 800, 480, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+	}
+
+	int Shader::GetAttrLocation(const char* name) {
+		auto itor = m_attrs.find(name);
+		int location;
+		if (itor == m_attrs.end()) {
+			location = glGetAttribLocation(m_program, name);
+			m_attrs.insert(pair<String, Int>(name, location));
+		}
+		else {
+			location = itor->second;
+		}
+		return location;
+	}
+
 
 	Bool Shader::IsCompiled() {
 		return m_isCompiled;

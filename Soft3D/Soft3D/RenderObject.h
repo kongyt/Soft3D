@@ -16,7 +16,7 @@ namespace Soft3D {
 
 	public:
 		GameObject* owner;
-		Bool visiable;
+		Bool visiable = true;
 	};
 }
 

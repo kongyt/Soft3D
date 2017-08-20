@@ -15,7 +15,7 @@ namespace Soft3D{
 		Color* Clone();
 
 		UInt ToUint();
-
+		void ToFloatBits(Float* pfloat);
 	public:
 		Float	r;
 		Float	g;

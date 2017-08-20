@@ -51,4 +51,9 @@ namespace Soft3D {
 		return color;
 	}
 
+	void Color::ToFloatBits(Float* pfloat) {
+		UInt* pcolor = (UInt*)(pfloat);
+		*pcolor = ToUint();
+	}
+
 }

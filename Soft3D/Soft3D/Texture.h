@@ -10,8 +10,10 @@ namespace Soft3D {
 	class DLLAPI Texture {
 	public:
 		Texture(Pixmap* pixmap);
-		void Init();
+		void Load();
+		void Unload();
 		void Bind();
+		void Unbind();
 		void Destroy();
 
 	public:
@@ -19,6 +21,8 @@ namespace Soft3D {
 		UInt glHandle;
 		Bool isLoaded;
 		UInt textureId;
+		Float width;
+		Float height;
 		Pixmap* pixmap;
 
 	};

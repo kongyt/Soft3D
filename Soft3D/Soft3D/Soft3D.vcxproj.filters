@@ -99,6 +99,30 @@
     <ClInclude Include="ShaderManager.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="TextureRegion.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="InputProcessor.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="InputAdapter.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="UILayer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="UIActor.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ClickListener.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="UIGroup.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Color.cpp">
@@ -153,6 +177,21 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Shader.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureRegion.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="InputAdapter.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="UIActor.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="UIGroup.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

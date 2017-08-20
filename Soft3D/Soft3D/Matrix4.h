@@ -27,6 +27,7 @@
 namespace Soft3D {
 
 	class Vector3;
+	class Quaternion;
 
 	class DLLAPI Matrix4 {
 	public:
@@ -51,6 +52,7 @@ namespace Soft3D {
 
 		Matrix4& Scale(const Vector3& scale);
 		Matrix4& Translate(const Vector3& trans);
+		Matrix4& Rotate(const Vector3& trans);
 		Matrix4& RotateX(Float rotation);
 		Matrix4& RotateY(Float rotation);
 		Matrix4& RotateZ(Float rotation);
