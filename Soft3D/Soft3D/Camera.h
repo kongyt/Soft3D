@@ -14,7 +14,7 @@ namespace Soft3D {
 		void SetToOrth(Float viewportWidth, Float viewportHeight);
 		void SetToOrth(Bool yDown, Float viewportWidth, Float viewportHeight);
 		void SetToPers(Float fieldOfView, Float viewportWidth, Float viewportHeight);
-
+		void Unproject(Vector3& vec, float viewportX, float viewportY, float viewportWidth, float viewportHeight);
 
 
 	public:

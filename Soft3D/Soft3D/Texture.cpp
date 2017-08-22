@@ -40,6 +40,14 @@ namespace Soft3D {
 		glBindTexture(glTarget, 0);
 		isLoaded = true;
 	}
+	void Texture::Reload() {
+		glBindTexture(glTarget, glHandle);
+		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);//此为纹理过滤参数设置
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexImage2D(glTarget, 0, ToGLPixelFormat(pixmap->format), pixmap->width, pixmap->height, 0, ToGLPixelFormat(pixmap->format), GL_UNSIGNED_BYTE, pixmap->data);
+		glBindTexture(glTarget, 0);
+	}
 
 	void Texture::Unload() {
 		glDeleteTextures(1, &glHandle);

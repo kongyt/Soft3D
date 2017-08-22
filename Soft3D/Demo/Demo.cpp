@@ -1,6 +1,27 @@
 #include <windows.h>
 #include <fcntl.h>
 #include <io.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include <libavcodec/avcodec.h>
+#include <libavformat/avformat.h>
+#include <libswscale/swscale.h>
+#include <libavutil/avutil.h>
+
+#pragma comment(lib, "avformat.lib")
+#pragma comment(lib, "avcodec.lib")
+#pragma comment(lib, "swscale.lib")
+#pragma comment(lib, "avutil.lib")
+
+#ifdef __cplusplus
+}
+#endif
 
 #include "../Soft3D/Soft3D.h"
 #include "DemoGame.h"
@@ -34,18 +55,24 @@ void RedirectIOToConsole()
 }
 
 
+
+
+
+
+
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE prevInstance, LPWSTR cmdLine, int nShow)
 {
 	bool result = false;
 	
 	RedirectIOToConsole();
+
 	WindowConfig config;
 	config.hInstance = hInstance;
 	config.title = TEXT("Soft3D Demo");
 	config.x = 200;
 	config.y = 200;
-	config.width = 1280;
-	config.height = 720;
+	config.width = 800;
+	config.height = 480;
 	config.hasBorder = true;
 	config.fullScreen = false;
 	config.resizable = false;

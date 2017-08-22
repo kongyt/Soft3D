@@ -1,5 +1,5 @@
-#ifndef _Group_H__
-#define _Group_H__
+#ifndef _UI_Group_H__
+#define _UI_Group_H__
 
 #include <vector>
 
@@ -12,6 +12,8 @@ namespace Soft3D{
 
 	class DLLAPI UIGroup :public UIActor{
 	public:
+		virtual void Render(RenderContext& context, Float parentAlpha);
+		void AddChild(UIActor* child);
 		UIActor* Hit(Float x, Float y);
 	private:
 		Matrix4 transform;

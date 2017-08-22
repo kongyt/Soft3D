@@ -52,4 +52,14 @@ namespace Soft3D {
 		Update(true);
 	}
 
+	void Camera::Unproject(Vector3& vec, float viewportX, float viewportY, float viewportWidth, float viewportHeight) {
+		float x = vec.x, y = vec.y;
+		x = x - viewportX;
+		y = y - viewportY;
+		vec.x = (2 * x) / viewportWidth - 1;
+		vec.y = (2 * y) / viewportHeight - 1;
+		vec.z = 2 * vec.z - 1;
+		m_invProjectionView.Prj(vec);
+	}
+
 }

@@ -88,6 +88,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GLES_Support.h" />
+    <ClInclude Include="UIButton.h" />
     <ClInclude Include="UIGroup.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="InputAdapter.h" />
@@ -111,6 +112,7 @@
     <ClInclude Include="Types.h" />
     <ClInclude Include="UIActor.h" />
     <ClInclude Include="UILayer.h" />
+    <ClInclude Include="Vector2.h" />
     <ClInclude Include="Vector3.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
@@ -135,7 +137,10 @@
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureRegion.cpp" />
     <ClCompile Include="UIActor.cpp" />
+    <ClCompile Include="UIButton.cpp" />
     <ClCompile Include="UIGroup.cpp" />
+    <ClCompile Include="UILayer.cpp" />
+    <ClCompile Include="Vector2.cpp" />
     <ClCompile Include="Vector3.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>

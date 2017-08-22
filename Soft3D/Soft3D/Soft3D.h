@@ -28,6 +28,10 @@
 #include "Input.h"
 #include "InputProcessor.h"
 #include "InputAdapter.h"
+#include "UIActor.h"
+#include "UIGroup.h"
+#include "UILayer.h"
+#include "UIButton.h"
 
 
 #endif

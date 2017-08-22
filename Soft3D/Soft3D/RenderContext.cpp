@@ -92,7 +92,9 @@ namespace Soft3D {
 	}
 	
 	void RenderContext::Destroy() {
-	
+		eglDestroyContext(m_eglDisplay, m_eglContext);
+		eglDestroySurface(m_eglDisplay, m_eglSurface);
+		eglTerminate(m_eglDisplay);
 	}
 
 	void RenderContext::SwapBuffer() {

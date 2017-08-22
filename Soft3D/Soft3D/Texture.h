@@ -12,6 +12,7 @@ namespace Soft3D {
 		Texture(Pixmap* pixmap);
 		void Load();
 		void Unload();
+		void Reload();
 		void Bind();
 		void Unbind();
 		void Destroy();

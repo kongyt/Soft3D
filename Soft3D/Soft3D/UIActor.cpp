@@ -1,5 +1,6 @@
 #include "UIActor.h"
 #include "MathUtils.h"
+#include "UIGroup.h"
 
 namespace Soft3D {
 
@@ -25,7 +26,7 @@ namespace Soft3D {
 		}
 	}
 
-	Vector3 UIActor::ParentToLocalCoordinates(Float parentCoordsX, Float parentCoordsY) {
+	Vector2 UIActor::ParentToLocalCoordinates(Float parentCoordsX, Float parentCoordsY) {
 		float rotation = this->rotation;
 		float scaleX = this->scaleX;
 		float scaleY = this->scaleY;
@@ -53,8 +54,13 @@ namespace Soft3D {
 			parentCoordsX= (tox * cosTheta + toy * sinTheta) / scaleX + originX;
 			parentCoordsY = (tox * -sinTheta + toy * cosTheta) / scaleY + originY;
 		}
-		return Vector3(parentCoordsX,parentCoordsY, 0);
+		return Vector2(parentCoordsX,parentCoordsY);
 	}
 
+	Vector2 UIActor::GlobalCoordsToLocal(Float globalX, Float globalY) {
+		if (parent == NULL) return Vector2(globalX, globalY);
+		Vector2 parentCoords = parent->GlobalCoordsToLocal(globalX, globalY);
+		return ParentToLocalCoordinates(parentCoords.x, parentCoords.y);
+	}
 
 }

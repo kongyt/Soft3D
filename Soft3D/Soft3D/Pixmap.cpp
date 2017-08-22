@@ -68,7 +68,7 @@ namespace Soft3D {
 		}
 		
 		data = pixels;
-
+		
 		format = StbiToPixmapFormat(format);
 		if (format != PixmapFormat::None) {
 			return true;
@@ -78,14 +78,28 @@ namespace Soft3D {
 	}
 
 	Bool Pixmap::AllocMemory(Int width, Int height, Int format) {
-		data = new Byte[width*height*GetPixelSize(format)];
+		data = (Byte*)malloc(width*height*GetPixelSize(format));
+		for (int i = 0; i < width*height*GetPixelSize(format); i++) {
+			data[i] = 255;
+		}
 		return true;
 	}
 
 	UInt Pixmap::GetPixelSize(Int format) {
-		return 4;
+		switch (format)
+		{
+		case PixmapFormat::RGB:
+			return 3;
+		case PixmapFormat::RGBA:
+			return 4;
+		default:
+			return 0;
+		}
 	}
 
 	
-
+	void Pixmap::Destroy() {
+		free(data);
+		data = NULL;
+	}
 }

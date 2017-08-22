@@ -123,6 +123,12 @@
     <ClInclude Include="UIGroup.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Vector2.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="UIButton.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Color.cpp">
@@ -192,6 +198,15 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="UIGroup.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="UILayer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector2.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="UIButton.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

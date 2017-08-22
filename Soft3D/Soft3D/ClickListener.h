@@ -6,7 +6,7 @@
 
 namespace Soft3D {
 
-	class ClickListener {
+	class DLLAPI ClickListener {
 	public:
 		virtual Bool TouchDown(Float x, Float y, Int keyCode) {
 			return true;

@@ -19,6 +19,8 @@ namespace Soft3D{
 		Pixmap(Byte encodedData[], Int offset, Int len);
 		Pixmap(Int width, Int height, Int format);
 
+		void Destroy();
+
 		void DrawPixmap(const Pixmap& pixmap, Int x, Int y);
 		void DrawPixmap(const Pixmap& pixmap, Int x, Int y, Int srcX, Int srcY, Int srcWidth, Int srcHeight);
 		void DrawPixmap(const Pixmap& pixmap, Int srcX, Int srcY, Int srcWidth, Int srcHeight, Int dstX, Int dstY, Int dstWidth, Int dstHeight);
