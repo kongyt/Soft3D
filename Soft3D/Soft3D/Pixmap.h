@@ -1,13 +1,15 @@
 #ifndef _Pixmap_H__
 #define _Pixmap_H__
 
+#include <stdio.h>
+
 #include "DllApi.h"
 #include "Types.h"
 
 
 namespace Soft3D{
 
-	enum PixmapFormat {
+	enum DLLAPI PixmapFormat {
 		None = 0,
 		RGB = 1,
 		RGBA = 2

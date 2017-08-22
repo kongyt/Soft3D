@@ -5,6 +5,14 @@
 
 namespace Soft3D {
 
+	Texture::Texture(Video* video) {
+		this->isLoaded = true;
+		this->pixmap = video->pixmap;
+		this->width = video->pixmap->width;
+		this->height = video->pixmap->height;
+		this->textureId = 0;
+	}
+
 	Texture::Texture(Pixmap* pixmap){
 		this->isLoaded = false;
 		this->pixmap = pixmap;
@@ -55,6 +63,7 @@ namespace Soft3D {
 
 
 	void Texture::Bind() {
+		Reload();
 		if (isLoaded == true) {
 			glBindTexture(glTarget, glHandle);
 		}

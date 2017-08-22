@@ -189,6 +189,7 @@ namespace Soft3D {
 		if (m_lastTextureId != texture.glHandle) {
 			texture.Bind();
 		}		
+		texture.Bind();
 	}
 
 }

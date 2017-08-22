@@ -3,12 +3,13 @@
 
 #include "DllApi.h"
 #include "Pixmap.h"
-
+#include "Video.h"
 
 namespace Soft3D {
 
 	class DLLAPI Texture {
 	public:
+		Texture(Video* video);
 		Texture(Pixmap* pixmap);
 		void Load();
 		void Unload();

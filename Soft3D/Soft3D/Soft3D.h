@@ -32,6 +32,7 @@
 #include "UIGroup.h"
 #include "UILayer.h"
 #include "UIButton.h"
+#include "Video.h"
 
 
 #endif

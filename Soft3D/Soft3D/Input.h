@@ -23,6 +23,8 @@ namespace Soft3D {
         Key_Left = VK_LEFT,
         Key_Right = VK_RIGHT,
 
+		Key_Space = VK_SPACE,
+
         Key_0 = 48,
         Key_1 = 49,
         Key_2 = 50,
